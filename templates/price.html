@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% block content %}
+<div style="background:  url({% static 'img/bg_project.jpg' %}) center/cover">
+        <div class="jumbotron text-center" style="background: rgba(0, 0, 0, 0.3)">
+          <div class="jumbo-content">
+            <h1 class="">Цены</h1>
+            <p>Цены CDC</p>
+          </div>
+        </div>
+</div>
+<div class="container">
+<div class="row">
+            <div class="col-lg-3 service-list">
+                <a href="{% url "price"  '365'  %}" class="category-item-project">Цены</a>
+            {% for add in additational_cats %}
+                <a href="{% url "price"  add.id  %}" class="category-item-project">{{ add.head }}</a>
+            {% endfor %}
+            </div>
+            <div class="col-lg-8 col-lg-offset-1">
+                {% if price_l == '365' %}
+                    {% for price in prices %}
+                    <div class="row text-center gen-price-it">
+                        <div class="item-price">
+                            <h3 class="text-center">{{ price.head|safe }}</h3>
+                                <div class="row table-price col-lg-5 col-lg-offset-1">
+                                    <div class="table-pr-h col-lg-6 text-center">
+                                        Мощность
+                                    </div>
+                                    <div class="table-pr-h col-lg-6 text-center">
+                                        Цена
+                                    </div>
+                                    {% for price_it in price_it %}
+                                        {% if price_it.price_key.id == price.id %}
+                                            <div class="table-pr-i col-lg-6 text-center">
+                                                {{ price_it.power }}
+                                            </div>
+                                            <div class="table-pr-i col-lg-6 text-center">
+                                                {{ price_it.price }}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="table-pr-h col-lg-12 text-center">
+                                            Среднегодовой доход
+                                    </div>
+                                    {% for profit in profit %}
+                                        {% if profit.price_key.id == price.id %}
+                                            <div class="table-pr-i col-lg-12 text-center">
+                                                {{ profit.profit }}
+                                            </div>
+                                        {% endif %}
+
+                                    {% endfor %}
+
+                                </div>
+            {#                 <div class="magic-line-partn mb-20"></div>#}
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                {% if price_l != '365' %}
+                    <h2 class="text-center">{{ additational.head }}</h2>
+                    <div class="service-cont text-justify">
+                        {{ additational.text|safe }}
+                    </div>
+                {% endif %}
+            </div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,244 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% block content %}
+    <div id="bootstrap-touch-slider" class="carousel bs-slider fade  control-round indicators-line" data-ride="carousel"
+         data-pause="hover" data-interval="false" xmlns="http://www.w3.org/1999/html">
+
+            <!-- Indicators -->
+{#            <ol class="carousel-indicators">#}
+{#                <li data-target="#bootstrap-touch-slider" data-slide-to="0" class="active"></li>#}
+{#                <li data-target="#bootstrap-touch-slider" data-slide-to="1"></li>#}
+{#                <li data-target="#bootstrap-touch-slider" data-slide-to="2"></li>#}
+{#            </ol>#}
+
+            <!-- Wrapper For Slides -->
+            <div class="carousel-inner" role="listbox">
+
+                <!-- Third Slide -->
+                {% for banner in banners %}
+                <div class="item {% if banner.first == True %}active{% endif %}">
+                    <!-- Slide Background -->
+{#                        <div class="item-img" style="background: url({% static 'img/solar_bg.jpg' %})"></div>#}
+{#                    <div style="height: 500px; position:absolute; background-image: url('{% static 'img/solar_bg.jpg' %}');"></div>#}
+                    <img src="{{ banner.img.url }}" alt="Bootstrap Touch Slider"  class="slide-image"/>
+                    <div class="bs-slider-overlay"></div>
+                    <div class="container">
+                        <div class="row">
+                            <!-- Slide Text Layer -->
+                            <div class="slide-text slide_style_left">
+                                <h1 data-animation="animated zoomInRight">{{ banner.head }}</h1>
+                                <p data-animation="animated fadeInLeft">{{ banner.text }}</p>
+{#                                <a href="http://bootstrapthemes.co/" target="_blank" class="btn btn-default" data-animation="animated fadeInLeft">select one</a>#}
+{#                                <a href="http://bootstrapthemes.co/" target="_blank"  class="btn btn-primary" data-animation="animated fadeInRight">select two</a>#}
+                            </div>
+                            <div data-animation="animated fadeInRight" class="panel-slide-poly">
+                                <img style="" src="{% static 'img/Poly_panel.jpg' %}">
+                            </div>
+                            <div data-animation="animated fadeInRight" class="panel-slide-mono">
+                                <img style="" src="{% static 'img/Mono_panele.jpg' %}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div><!-- End of Wrapper For Slides -->
+            <!-- Left Control -->
+            <a class="left carousel-control" href="#bootstrap-touch-slider" role="button" data-slide="prev">
+                <span class="fa fa-angle-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <!-- Right Control -->
+            <a class="right carousel-control" href="#bootstrap-touch-slider" role="button" data-slide="next">
+                <span class="fa fa-angle-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div> <!-- End  bootstrap-touch-slider Slider -->
+
+        <!-- Bootstrap bootstrap-touch-slider Slider Main JS File -->
+        <script src="{% static 'js/bootstrap-touch-slider.js' %}"></script>
+
+        <script type="text/javascript">
+            $('#bootstrap-touch-slider').bsTouchSlider();
+        </script>
+        <div class="container about">
+            <div class="row">
+                {% for about in abouts %}
+                <h1 class="text-center">{{ about.head }}</h1>
+                <div class="col-lg-offset-2 col-lg-8 text-center">
+                    <div class="about-cont text-center">
+                        {{ about.text|safe }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="container circle">
+            <div class="row">
+                {% if circles %}
+                    {% for circle in circles %}
+                    <h1 class="text-center">{{ about.head }}</h1>
+                    <div class="col-lg-4 text-center">
+                        <div class="counter text-center" data-count="{{ circle.count }}">0</div>
+                        <div class="magic-line-circle text-center"></div>
+                        <div class="circle-text text-center">
+                            {{ circle.text|safe }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+         <div class="container about">
+            <div class="row">
+                {% if missions %}
+                    {% for mission in missions %}
+                    <h2 class="text-center">{{ mission.head }}</h2>
+                    <div class="col-lg-offset-2 col-lg-8 text-center">
+                        <div class="about-cont text-center">
+                            {{ mission.text|safe }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="container projects">
+        <div class="row">
+            <h2 class="text-center mb-30">{% trans 'НАШИ ПРОЕКТЫ' %}</h2>
+            {% for project in projects %}
+                <a class="item-project-a">
+                <div class="item-project col-lg-6" style="background: url({{ project.img.url }}) center/cover no-repeat">
+                      <div class="item-pr-cont">
+                          <h3 class="text-center">{{ project.project_key.head }}</h3>
+                          <div class="magic-line"></div>
+                          <div class="project-main-text">
+                              {{ project.project_key.text|safe }}
+                          </div>
+                      </div>
+                </div>
+                </a>
+            {% endfor %}
+            <div class="text-center col-lg-12 project-but-block">
+                <a href="{% url 'projects' %}" class="but-project">ALL PROJECTS</a>
+            </div>
+        </div>
+        </div>
+        <div class="container mt-20 partners">
+         <h3 class="mt-20 mb-20 text-center">УЧАСТНИКИ КОНСОРЦИУМА</h3>
+            <div class="row text-center">
+                <div class="col-lg-4">
+                    <div class="partner-item">
+                        <h3>
+                            CDC Consalting
+                        </h3>
+                        <div class="magic-line-partn mb-20"></div>
+                        <p>маркетинг, консалтинг, закупка оборудования</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="partner-item">
+                        <h3>
+                            CDC Engineering
+                        </h3>
+                        <div class="magic-line-partn mb-20"></div>
+                        <p>Инвестиционная компания</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="partner-item">
+                    <h3>
+                        СИДИСИ
+                    </h3>
+                    <div class="magic-line-partn mb-20"></div>
+                    <p>Проектирование, строительство</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="partner-item">
+                    <h3>
+                        BETEN
+                    </h3>
+                    <div class="magic-line-partn mb-20"></div>
+                    <p>Инжениринговая компания</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="partner-item">
+                    <h3>
+                        A-Energy
+                    </h3>
+                    <div class="magic-line-partn mb-20"></div>
+                    <p>импортёр и дистрибьютор оборудования, проектирование и строительство</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="partner-item">
+                    <h3>
+                        TopTrade
+                    </h3>
+                    <div class="magic-line-partn mb-20"></div>
+                    <p>интернет магазин. Розничная торговля энергоэффективными товарами.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-lg-offset-4">
+                    <div class="partner-item">
+                    <h3>
+                        Основа электро
+                    </h3>
+                    <div class="magic-line-partn mb-20"></div>
+                    <p>кабельная продукция</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+        $(document).ready(function() {
+            var counter_i = 0;
+            $(window).scroll(function () {
+                var dst_prod = $('.about').offset().top - 320;// При прокрутке попадаем в эту функцию
+                var dst_proj = $('.projects').offset().top - 400;
+                if ($(this).scrollTop() > dst_proj){
+                    $('.projects').animate({display: 'block'}, 2000);
+
+                }
+                if ($(this).scrollTop() > dst_prod)
+                {
+                    $('.about-cont').animate({opacity: '1'}, 2000);
+                    if (counter_i == 0)
+                    {
+                        counter_i = 2;
+                        $('.magic-line-circle').animate({width: '15%', "margin-left": "65%"}, 750);
+                        $('.magic-line-circle').animate({width: '50%', "margin-left": "25%"}, 750);
+                        $('.magic-line-circle').animate({width: '20%', "margin-left": "40%"}, 750);
+                    }
+                    $('.counter').each(function () {
+{#                        counter_i++;#}
+{#                        console.log(counter_i);#}
+                        var $this = $(this),
+                            countTo = $this.attr('data-count');
+                        $({countNum: $this.text()}).slideDown().animate({
+                                countNum: countTo
+                            },
+
+                            {
+                                duration: 1000,
+                                                easing:'linear',
+                                step: function () {
+                                    $this.text(Math.floor(this.countNum));
+                                },
+                                complete: function () {
+                                    $this.text(this.countNum);
+                                    //alert('finished');
+                                }
+
+                            });
+                    });
+
+               }
+            });
+        });
+        </script>
+{% endblock %}

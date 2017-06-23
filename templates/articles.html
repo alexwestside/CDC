@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% block content %}
+<div style="background:  url({% static 'img/bg_project.jpg' %}) center/cover">
+    <div class="jumbotron text-center" style="background: rgba(0, 0, 0, 0.3)">
+      <div class="jumbo-content">
+        <h1 class="">Статьи</h1>
+        <p>Статьи</p>
+      </div>
+    </div>
+</div>
+    <div class="container projects">
+        <div class="row">
+            <div class="col-lg-3 article-list">
+            {% for category in categories %}
+                <a href="" class="category-item-project">{{ category.head }}</a>
+            {% endfor %}
+            </div>
+            <div class="col-lg-9 article-item">
+                {% for artc in article %}
+                    <div class="row article-cont text-center">
+
+                        <div class="col-lg-6">
+                            <img class="mt-20 mb-20" src="{{ artc.img.url }}" style="max-width: 100%; width: 350px"/>
+                        </div>
+                        <div class="mt-20 col-lg-6  text-justify">
+                            <h4 class="text-center">{{ artc.head }}</h4>
+                            <div class="art-text">
+                                {{ artc.text|safe|truncatechars_html:220 }}
+                            </div>
+                        </div>
+                        <div class="row mb-20 info col-lg-12">
+                            <div class="col-lg-3 text-center" style="height: 80%">
+                                {{ artc.date }}
+                            </div>
+                            <div class="col-lg-3 text-center">
+                                <a class="tag-item-link"><i class="fa fa-tag" style="padding-right: 10px"></i>{{ artc.tag_key.head }}</a>
+                            </div>
+{#                            <div class="col-lg-6 text-center">#}
+{#                                <a class="but-article">Подробнее</a>#}
+{#                            </div>#}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col-lg-8 col-lg-offset-4 text-center">
+                <nav aria-label="Page navigation">
+                  <ul class="pagination">
+                    <li class="hide">
+                      <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                    </li>
+                      {% for page in articles_pagi.paginator.page_range %}
+                        {% if page == articles_pagi.number %}
+                            <li class="active">
+                                <a  id="{{ page }}" href="" data-page="{{ page }}">{{ page }}</a>
+                            </li>
+                        {% else %}
+                             <li>
+                                <a id="{{ page }}" href="" id="#pagi_item" data-page="{{ page }}">{{ page }}</a>
+                            </li>
+                        {% endif %}
+                      {% endfor %}
+                    <li class="hide">
+                      <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+        </div>
+        <form id="csrf_getting_form" class="hidden">
+        {% csrf_token %}
+        </form>
+    </div>
+{% endblock %}

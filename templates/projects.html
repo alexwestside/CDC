@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% block content %}
+    <div style="background:  url({% static 'img/bgmain.png' %}) center/cover">
+        <div class="jumbotron text-center" style="background: rgba(0, 0, 0, 0.3)">
+          <div class="jumbo-content">
+            <h1 class="">Проеткты</h1>
+            <p>Наши проекты</p>
+          </div>
+        </div>
+    </div>
+    <div class="container projects">
+        <div class="row">
+            <h2 class="text-center mb-30">{% trans 'Наши проекты' %}</h2>
+            <div class="col-lg-4">
+            {% for category in categories %}
+                <a href="javascript: pagi(1, 1, '{{ category.id }}')" class="category-item-project">{{ category.head }}</a>
+            {% endfor %}
+            </div>
+            <div class="col-lg-8" id="projects">
+                {% for project in project_pagi %}
+                    <a class="item-project-a">
+                    <div class="item-project col-lg-6" style="background: url({{ project.img.url }}) center/cover no-repeat">
+                          <div class="item-pr-cont">
+                              <h3 class="text-center">{{ project.project_key.head }}</h3>
+                              <div class="magic-line"></div>
+                               <div class="project-main-text">
+                                {{ project.project_key.text|safe }}
+                                </div>
+                          </div>
+                    </div>
+                    </a>
+                {% endfor %}
+            </div>
+             <div class="col-lg-8 col-lg-offset-4 text-center">
+                <nav aria-label="Page navigation">
+                  <ul class="pagination">
+                    <li class="hide">
+                      <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                    </li>
+                      {% for page in project_pagi.paginator.page_range %}
+                        {% if page == project_pagi.number %}
+                            <li class="active">
+                                <a  id="{{ page }}" href="javascript: pagi({{ page }}, {{ page }}, 'all')" data-page="{{ page }}">{{ page }}</a>
+                            </li>
+                        {% else %}
+                             <li>
+                                <a id="{{ page }}" href="javascript: pagi({{ page }}, {{ page }}, 'all')" id="#pagi_item" data-page="{{ page }}">{{ page }}</a>
+                            </li>
+                        {% endif %}
+                      {% endfor %}
+                    <li class="hide">
+                      <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+            </div>
+        </div>
+        <form id="csrf_getting_form" class="hidden">
+        {% csrf_token %}
+        </form>
+    </div>
+    <script>
+{#    $(document).ready(function() {#}
+        function pagi (page, id, category){
+            var data = {};
+            var id_el = '#' + id;
+            var csrf_token = $('#csrf_getting_form').find('[name="csrfmiddlewaretoken"]').val();
+            data["csrfmiddlewaretoken"] = csrf_token;
+            data["page"] = page;
+            data["category"] = category;
+{#            var email = $(this).attr('data-page');#}
+{#            e.preventDefault();#}
+            console.log(page);
+                    $.ajax({
+                        url: '/projects_pagi/',
+                        type: 'POST',
+                        data: data,
+                        success: function(data) {
+                            $('.pagination').find('.active').removeClass('active');
+                            $(id_el).parent().addClass('active');
+                            console.log(id_el);
+                            $('#projects').empty();
+                            var content = "";
+                            $.each(data, function (index, data){
+                                content +=
+                                    '<a class="item-project-a" href="#">'
+                                        + '<div class="item-project col-lg-6"' + 'style="background: url(' + data.img + ') center/cover no-repeat">'
+                                            + '<div class="item-pr-cont">'
+                                                + '<h3 class="text-center">' + data.head_main + '</h3>'
+                                                + '<div class="magic-line"></div>'
+                                                + '<div class="project-main-text">' + data.text + '</div>'
+                                            + '</div>'
+                                        +'</div>'
+                                    +'</a>';
+                            });
+                            console.log(content)
+                            $('#projects').append(content);
+                        }
+                        });
+        }
+{#    });#}
+    </script>
+{% endblock %}

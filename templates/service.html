@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% block content %}
+   <div style="background:  url({% static 'img/bgmain.png' %}) center/cover">
+        <div class="jumbotron text-center" style="background: rgba(0, 0, 0, 0.3)">
+          <div class="jumbo-content">
+            <h1 class="">Услуги</h1>
+            <p>Услуги CDC</p>
+          </div>
+        </div>
+    </div>
+    <div class="container projects">
+        <div class="row">
+            <div class="col-lg-3 service-list">
+            {% for service in services %}
+                <a href="javascript: service_sort({{ service.id }})" class="category-item-project">{{ service.head }}</a>
+            {% endfor %}
+            </div>
+            <div class="col-lg-9 service-item">
+                <h2 class="text-center">{{ service_current.head }}</h2>
+                <div class="service-cont text-justify">
+                    {{ service_current.text|safe }}
+                </div>
+            </div>
+        </div>
+        <form id="csrf_getting_form" class="hidden">
+        {% csrf_token %}
+        </form>
+    </div>
+    <script>
+{#    $(document).ready(function() {#}
+        function service_sort (id){
+            var data = {};
+            var id_el = '#' + id;
+            var csrf_token = $('#csrf_getting_form').find('[name="csrfmiddlewaretoken"]').val();
+            data["csrfmiddlewaretoken"] = csrf_token;
+            data["id"] = id;
+{#            var email = $(this).attr('data-page');#}
+{#            e.preventDefault();#}
+                    $.ajax({
+                        url: '/service_sort/',
+                        type: 'POST',
+                        data: data,
+                        success: function(data) {
+                            console.log(data);
+                            $('.service-item').empty();
+                            var content = "";
+                            $.each(data, function (index, data){
+                                content +=
+                                    '<h2 class="text-center">' + data.head + '</h2>'
+                                        +'<div class="service-cont text-justify">'
+                                            + data.text
+                                    +'</div>';
+                            });
+                            console.log(content);
+                            $('.service-item').append(content);
+                        }
+                        });
+        }
+{#    });#}
+    </script>
+{% endblock %}

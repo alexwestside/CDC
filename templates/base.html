@@ -1,0 +1,180 @@
+{% load staticfiles %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="apple-touch-startup-image" href="splash-screen.png" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet" media="all">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" href="{% static 'pl/font-awesome-4.7.0/css/font-awesome.min.css' %}"/>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="{% static 'js/js.js' %}"></script>
+</head>
+<body>
+<div class="visible-xs text-right top-mob">
+    <div class="arrow-menu">
+{#        <i class="fa fa-phone fa-2x"></i>#}
+        <img class="img-top-ar" src="{% static 'img/down-white.png' %}">
+    </div>
+</div>
+<div class="menu visible-lg">
+    <div class="container">
+{#        <div class="col-lg-3 col-lg-offset-1">#}
+{#            <a class="phone-nav" href="tel:{{ contact.phone1 }}"><i class="fa fa-envelope"></i>teemophey@gmail.com</a>#}
+{#        </div>#}
+{#        <div class="col-lg-2">#}
+{#            <a class="phone-nav" href="tel:{{ contact.phone1 }}"><i class="fa fa-phone"></i>+38 093 447 88 58</a>#}
+{#        </div>#}
+{#        <div class="col-lg-2">#}
+{#            <a class="phone-nav" href="tel:{{ contact.phone1 }}"><i class="fa fa-phone"></i>+38 094 945 81 45</a>#}
+{#        </div>#}
+{#        <div class="col-lg-2">#}
+{#            <a class="phone-nav" href="tel:{{ contact.phone1 }}"><i class="fa fa-phone"></i>+38 048 789 21 45</a>#}
+{#        </div>#}
+        <!--
+        <div class="col-lg-offset-6 col-lg-3">
+            <a class="btn-contact">
+                Заказать звонок
+            </a>
+        </div>
+        -->
+        <div class="col-lg-2 text-center col-lg-offset-10" style="">
+        <form class="cart-notification-wrap" style="display: inline" id='lang_ru' action='/i18n/setlang/' method='POST'>
+            {% csrf_token %}
+            <input type='hidden' name='language' value='ru'/>
+                  <a class="lang-change" href='#' title='Russian' onclick="document.getElementById('lang_ru').submit()">
+    {#                                          <img class="lang" style = "height: 25px" src="{% static 'img/Ukraine.png' %}" alt="ru">#}
+                  RU
+                  </a>
+        </form>
+         <form id='lang_en' action='/i18n/setlang/' style="display: inline" method='POST'>{% csrf_token %}
+            <input type='hidden' name='language' value='en'/>
+                <a  class="lang-change" href='#' title='English' onclick="document.getElementById('lang_en').submit()">
+{#                    <img style = "height: 25px" src="{% static 'img/United States of America.png' %}" alt="en">#}
+                EN
+                </a>
+        </form>
+        </div>
+    </div>
+
+</div>
+<nav id = "nav" class="navbar navbar-custom">
+        <div class="container">
+            <div class="navbar-header">
+                <button  class="navbar-toggle  grey-bdr" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="grey-bg icon-bar"></span>
+                    <span class="grey-bg icon-bar"></span>
+                    <span class="grey-bg icon-bar"></span>
+                </button>
+                <a id = "navbar_l" class="navbar-brand" href="{% url 'home' %}">
+                    <img class="img-resp" src="{% static 'img/logo.png' %}"/>
+                </a>
+            </div>
+            <nav  id="navbar" class="collapse navbar-collapse">
+                <ul   class="nav navbar-nav">
+                      <li class=" text-center">
+                          <a href="{% url 'home' %}" class="nav-but">{% trans "ГЛАВНАЯ" %}
+                            <div class="magic-line"></div>
+                          </a>
+                      </li>
+                        <li class="text-center">
+                          <a href="{% url 'projects' %}" title="{% trans "ПРОЕКТЫ" %}" class="go_to nav-but">{% trans "ПРОЕКТЫ" %}
+                           <div class="magic-line"></div>
+                          </a>
+                      </li>
+                    <li class="text-center">
+                          <a href="{% url 'service' %}" class="go_to nav-but">{% trans "УСЛУГИ" %}
+                           <div class="magic-line"></div>
+                          </a>
+                      </li>
+                     <li class="text-center">
+                          <a href="{% url 'price' 365 %}" class="go_to nav-but">{% trans "ЦЕНЫ" %}
+                           <div class="magic-line"></div>
+                          </a>
+                      </li>
+                    <li class="text-center">
+                          <a href="{% url 'articles' %}" class="go_to nav-but">{% trans "НОВОВСТИ" %}
+                              <div class="magic-line"></div>
+                          </a>
+                    </li>
+                    <li class=" text-center">
+                          <a href="#contact" class="go_to nav-but">{% trans "КОНТАКТЫ" %}
+                           <div class="magic-line"></div>
+                          </a>
+                      </li>
+                    <li >
+
+                        </li>
+
+                        <li>
+
+                        </li>
+                </ul>
+            </nav><!--/.nav-collapse -->
+        </div>
+    </nav>
+
+{% block content %}
+{% endblock%}
+<div class="container mt-20 mb-20 main-form-contact">
+            <h2 class="text-center">МЫ СВЯЖЕМСЯ С ВАМИ</h2>
+            <div class="col-lg-6 col-lg-offset-3">
+                <p class="mt-20 mb-20 text-center call-back-text">
+                    Оставьте, пожалуйста, нам заявку. Наши специалисты проконсультируют Вас!
+                </p>
+            </div>
+            <div class="col-lg-12">
+           <!-- Contact FORM -->
+             <!-- Contact FORM -->
+                        <form name="form-name" class="contact-form" id="contact" role="form" method="POST">
+                        {% csrf_token %}
+                            <!-- IF MAIL SENT SUCCESSFULLY -->
+                            <h6 class="successContent">
+                                <i class="fa fa-check left" style="color: #5cb45d;"></i>Your message has been sent successfully.
+                            </h6>
+                            <!-- END IF MAIL SENT SUCCESSFULLY -->
+
+                            <!-- MAIL SENDING UNSUCCESSFULL -->
+                            <h6 class="errorContent">
+                                <i class="fa fa-exclamation-circle left" style="color: #e1534f;"></i>There was a problem validating the form please check!
+                            </h6>
+                            <!-- END MAIL SENDING UNSUCCESSFULL -->
+
+                            <div class="form-field-wrapper col-lg-4">
+                                <input class="input-md form-full" id="form-name" type="text" name="form-name" placeholder="Ваше Имя" required>
+                            </div>
+
+                            <div class="form-field-wrapper col-lg-4">
+                                <input class="input-md form-full" id="form-email" type="email" name="form-email" placeholder="Ваш Email" Email required>
+                            </div>
+                            <div class="form-field-wrapper col-lg-4">
+                                <input class="input-md form-full" id="form-email" type="email" name="form-email" placeholder="Ваш Телефон" Phone required>
+                            </div>
+                            <div class="form-field-wrapper col-lg-12">
+                                <input class="input-md form-full" id="form-subject" type="text" name="form-subject" placeholder="Тема письма">
+                            </div>
+
+                            <div class="form-field-wrapper col-lg-12">
+                                <textarea class="form-full" id="form-message" rows="7" name="form-message" placeholder="Напишите нам" required></textarea>
+                            </div>
+                            <div class="text-center">
+                            <button  class="btn btn-md btn-black" type="submit" id="form-submit" name="submit">Отправить сообщение</button>
+                            </div>
+                        </form>
+                        <!-- END Contact FORM -->
+            </div>
+        </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
+</body>
+</html>
