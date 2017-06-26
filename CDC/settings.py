@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for CDC project.
 
@@ -119,6 +120,7 @@ LANGUAGE_CODE = 'ru'
 from django.utils.translation import ugettext_lazy as _
 
 LANGUAGES = (
+    ('uk', _('Ukrainian')),
     ('ru', _('Russian')),
     ('en', _('English')),
 )
@@ -137,6 +139,12 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'cdc.energy.mail'
+EMAIL_HOST_PASSWORD = 'A1qwerty'
+EMAIL_PORT = 587
 
 
 # Static files (CSS, JavaScript, Images)

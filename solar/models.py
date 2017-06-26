@@ -1,7 +1,7 @@
-# -*- coding: utf8 -*-
-
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
+
 
 # Create your models here.
 
@@ -105,6 +105,20 @@ class Img_project(models.Model):
         verbose_name_plural = 'Картинки_проекты'
 
 
+class Partner(models.Model):
+    head = models.CharField(max_length=500, null=True, blank=True)
+    text = models.CharField(max_length=500, null=True, blank=True)
+    img = models.ImageField(null=True, blank=True)
+
+    def __unicode__(self):
+        return '%s' % self.head
+
+    class Meta:
+        db_table = 'Partner'
+        verbose_name = 'Партнер'
+        verbose_name_plural = 'Партнеры'
+
+
 class Service(models.Model):
     head = models.CharField(max_length=500, null=True, blank=True)
     text = models.TextField(null=True, blank=True)
@@ -205,6 +219,7 @@ class Articles(models.Model):
     date = models.DateField(blank=True, null=True)
     general = models.BooleanField(default=False)
     text = models.TextField(blank=True, null=True)
+    facebook_link = models.CharField(max_length=1000, null=True, blank=True)
     img = models.ImageField(blank=True, null=True)
 
     def __unicode__(self):
@@ -214,3 +229,128 @@ class Articles(models.Model):
         db_table = 'Articles'
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
+
+
+class Contacts(models.Model):
+    head = models.CharField(max_length=1000, null=True, blank=True)
+    text = models.CharField(max_length=2000, null=True, blank=True)
+    img_back = models.ImageField(null=True, blank=True)
+
+    def __unicode__(self):
+        return '%s' % self.head
+
+    class Meta:
+        db_table = 'Contact'
+        verbose_name = 'Контакты'
+        verbose_name_plural = 'Контакты'
+
+
+class Project_main(models.Model):
+    head = models.CharField(max_length=1000, null=True, blank=True)
+    text = models.CharField(max_length=2000, null=True, blank=True)
+    img_back = models.ImageField(null=True, blank=True)
+
+    def __unicode__(self):
+        return '%s' % self.head
+
+    class Meta:
+        db_table = 'Project_main'
+        verbose_name = 'Страничка_проектов'
+        verbose_name_plural = 'Страничка_проектов'
+
+
+class Service_main(models.Model):
+    head = models.CharField(max_length=1000, null=True, blank=True)
+    text = models.CharField(max_length=2000, null=True, blank=True)
+    img_back = models.ImageField(null=True, blank=True)
+
+    def __unicode__(self):
+        return '%s' % self.head
+
+    class Meta:
+        db_table = 'Service_main'
+        verbose_name = 'Страничка_услуги'
+        verbose_name_plural = 'Страничка_услуги'
+
+
+class Price_main(models.Model):
+    head = models.CharField(max_length=1000, null=True, blank=True)
+    text = models.CharField(max_length=2000, null=True, blank=True)
+    img_back = models.ImageField(null=True, blank=True)
+
+    def __unicode__(self):
+        return '%s' % self.head
+
+    class Meta:
+        db_table = 'Price_main'
+        verbose_name = 'Страничка_цен'
+        verbose_name_plural = 'Страничка_цен'
+
+
+class Article_main(models.Model):
+    head = models.CharField(max_length=1000, null=True, blank=True)
+    text = models.CharField(max_length=2000, null=True, blank=True)
+    img_back = models.ImageField(null=True, blank=True)
+
+    def __unicode__(self):
+        return '%s' % self.head
+
+    class Meta:
+        db_table = 'Article_main'
+        verbose_name = 'Страничка_статей'
+        verbose_name_plural = 'Страничка_статей'
+
+
+class Form_cont_main(models.Model):
+    form_name = models.CharField(max_length=1000, null=True, blank=True)
+    head_preview = models.CharField(max_length=1000, null=True, blank=True)
+    text_preview = models.CharField(max_length=2000, null=True, blank=True)
+    text_ans = models.CharField(max_length=2000, null=True, blank=True)
+
+    def __unicode__(self):
+        return '%s' % self.form_name
+
+    class Meta:
+        db_table = 'Form_cont'
+        verbose_name = 'Текст_формы'
+        verbose_name_plural = 'Тексты_форм'
+
+
+class Phone(models.Model):
+    contact_key = models.ForeignKey(Contacts, null=True, blank=True)
+    phone = models.CharField(max_length=200, null=True, blank=True)
+
+    def __unicode__(self):
+        return '%s' % self.phone
+
+    class Meta:
+        db_table = 'Phone'
+        verbose_name = 'Телефон'
+        verbose_name_plural = 'Телефоны'
+
+
+class Email(models.Model):
+    contact_key = models.ForeignKey(Contacts, null=True, blank=True)
+    email = models.CharField(max_length=200, null=True, blank=True)
+
+    def __unicode__(self):
+        return '%s' % self.email
+
+    class Meta:
+        db_table = 'Email'
+        verbose_name = 'Email'
+        verbose_name_plural = 'Emails'
+
+
+class Adres(models.Model):
+    contact_key = models.ForeignKey(Contacts, null=True, blank=True)
+    adress = models.CharField(max_length=200, null=True, blank=True)
+
+    def __unicode__(self):
+        return '%s' % self.adress
+
+    class Meta:
+        db_table = 'Adres'
+        verbose_name = 'Адрес'
+        verbose_name_plural = 'Адреса'
+

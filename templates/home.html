@@ -4,7 +4,6 @@
 {% block content %}
     <div id="bootstrap-touch-slider" class="carousel bs-slider fade  control-round indicators-line" data-ride="carousel"
          data-pause="hover" data-interval="false" xmlns="http://www.w3.org/1999/html">
-
             <!-- Indicators -->
 {#            <ol class="carousel-indicators">#}
 {#                <li data-target="#bootstrap-touch-slider" data-slide-to="0" class="active"></li>#}
@@ -27,17 +26,21 @@
                         <div class="row">
                             <!-- Slide Text Layer -->
                             <div class="slide-text slide_style_left">
+                                {% if banner.head %}
                                 <h1 data-animation="animated zoomInRight">{{ banner.head }}</h1>
+                                {% endif %}
+                                {% if banner.text %}
                                 <p data-animation="animated fadeInLeft">{{ banner.text }}</p>
 {#                                <a href="http://bootstrapthemes.co/" target="_blank" class="btn btn-default" data-animation="animated fadeInLeft">select one</a>#}
 {#                                <a href="http://bootstrapthemes.co/" target="_blank"  class="btn btn-primary" data-animation="animated fadeInRight">select two</a>#}
+                                {% endif %}
                             </div>
-                            <div data-animation="animated fadeInRight" class="panel-slide-poly">
-                                <img style="" src="{% static 'img/Poly_panel.jpg' %}">
-                            </div>
-                            <div data-animation="animated fadeInRight" class="panel-slide-mono">
-                                <img style="" src="{% static 'img/Mono_panele.jpg' %}">
-                            </div>
+{#                            <div data-animation="animated fadeInRight" class="panel-slide-poly">#}
+{#                                <img style="" src="{% static 'img/Poly_panel.jpg' %}">#}
+{#                            </div>#}
+{#                            <div data-animation="animated fadeInRight" class="panel-slide-mono">#}
+{#                                <img style="" src="{% static 'img/Mono_panele.jpg' %}">#}
+{#                            </div>#}
                         </div>
                     </div>
                 </div>
@@ -121,67 +124,27 @@
                 </a>
             {% endfor %}
             <div class="text-center col-lg-12 project-but-block">
-                <a href="{% url 'projects' %}" class="but-project">ALL PROJECTS</a>
+                <a href="{% url 'projects' %}" class="but-project">{% trans 'ВСЕ ПРОЕТКЫ' %}</a>
             </div>
         </div>
         </div>
         <div class="container mt-20 partners">
-         <h3 class="mt-20 mb-20 text-center">УЧАСТНИКИ КОНСОРЦИУМА</h3>
+         <h3 class="mt-20 mb-20 text-center">{% trans 'УЧАСТНИКИ КОНСОРЦИУМА' %}</h3>
             <div class="row text-center">
-                <div class="col-lg-4">
-                    <div class="partner-item">
-                        <h3>
-                            CDC Consalting
-                        </h3>
-                        <div class="magic-line-partn mb-20"></div>
-                        <p>маркетинг, консалтинг, закупка оборудования</p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="partner-item">
-                        <h3>
-                            CDC Engineering
-                        </h3>
-                        <div class="magic-line-partn mb-20"></div>
-                        <p>Инвестиционная компания</p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="partner-item">
-                    <h3>
-                        СИДИСИ
-                    </h3>
-                    <div class="magic-line-partn mb-20"></div>
-                    <p>Проектирование, строительство</p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="partner-item">
-                    <h3>
-                        BETEN
-                    </h3>
-                    <div class="magic-line-partn mb-20"></div>
-                    <p>Инжениринговая компания</p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="partner-item">
-                    <h3>
-                        A-Energy
-                    </h3>
-                    <div class="magic-line-partn mb-20"></div>
-                    <p>импортёр и дистрибьютор оборудования, проектирование и строительство</p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="partner-item">
-                    <h3>
-                        TopTrade
-                    </h3>
-                    <div class="magic-line-partn mb-20"></div>
-                    <p>интернет магазин. Розничная торговля энергоэффективными товарами.</p>
-                    </div>
-                </div>
+                {% if partners %}
+                    {% for parnter in partners %}
+                        <div class="col-lg-4">
+                            <div class="partner-item">
+                                <img src="{{ parnter.img.url }}"/>
+                                <h3>
+                                    {{ partner.head }}
+                                </h3>
+                                <div class="magic-line-partn mb-20"></div>
+                                <p>{{ parnter.text }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
                 <div class="col-lg-4 col-lg-offset-4">
                     <div class="partner-item">
                     <h3>
@@ -193,12 +156,11 @@
                 </div>
             </div>
         </div>
-
         <script type="text/javascript">
         $(document).ready(function() {
             var counter_i = 0;
             $(window).scroll(function () {
-                var dst_prod = $('.about').offset().top - 320;// При прокрутке попадаем в эту функцию
+                var dst_prod = $('.about').offset().top - 520;// При прокрутке попадаем в эту функцию
                 var dst_proj = $('.projects').offset().top - 400;
                 if ($(this).scrollTop() > dst_proj){
                     $('.projects').animate({display: 'block'}, 2000);

@@ -2,17 +2,21 @@
 {% load staticfiles %}
 {% load i18n %}
 {% block content %}
-    <div style="background:  url({% static 'img/bgmain.png' %}) center/cover">
+    <div style="background:  url({{ gallery.img_back.url }}) center/cover fixed">
         <div class="jumbotron text-center" style="background: rgba(0, 0, 0, 0.3)">
           <div class="jumbo-content">
-            <h1 class="">Проеткты</h1>
-            <p>Наши проекты</p>
+            {% if  gallery.head %}
+                <h1 class="">{{ gallery.head }}</h1>
+            {% endif %}
+            {% if  gallery.text %}
+                <p>{{ gallery.text }}</p>
+            {% endif %}
           </div>
         </div>
     </div>
-    <div class="container projects">
+    <div class="container projects mt-30">
         <div class="row">
-            <h2 class="text-center mb-30">{% trans 'Наши проекты' %}</h2>
+            <h3></h3>
             <div class="col-lg-4">
             {% for category in categories %}
                 <a href="javascript: pagi(1, 1, '{{ category.id }}')" class="category-item-project">{{ category.head }}</a>

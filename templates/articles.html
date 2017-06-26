@@ -2,41 +2,54 @@
 {% load staticfiles %}
 {% load i18n %}
 {% block content %}
-<div style="background:  url({% static 'img/bg_project.jpg' %}) center/cover">
-    <div class="jumbotron text-center" style="background: rgba(0, 0, 0, 0.3)">
-      <div class="jumbo-content">
-        <h1 class="">Статьи</h1>
-        <p>Статьи</p>
-      </div>
+    <div style="background:  url({{ gallery.img_back.url }}) center/cover fixed">
+        <div class="jumbotron text-center" style="background: rgba(0, 0, 0, 0.3)">
+          <div class="jumbo-content">
+            {% if  gallery.head %}
+                <h1 class="">{{ gallery.head }}</h1>
+            {% endif %}
+            {% if  gallery.text %}
+                <p>{{ gallery.text }}</p>
+            {% endif %}
+          </div>
+        </div>
     </div>
-</div>
     <div class="container projects">
         <div class="row">
             <div class="col-lg-3 article-list">
+             <a href="{% url 'articles' 'all' %}" class="category-item-project">{% trans "Все новости" %}</a>
             {% for category in categories %}
-                <a href="" class="category-item-project">{{ category.head }}</a>
+                <a href="{% url 'articles' category.id %}" title="{% url 'articles' category.id %}" class="category-item-project">{{ category.head }}</a>
             {% endfor %}
             </div>
             <div class="col-lg-9 article-item">
                 {% for artc in article %}
                     <div class="row article-cont text-center">
-
                         <div class="col-lg-6">
                             <img class="mt-20 mb-20" src="{{ artc.img.url }}" style="max-width: 100%; width: 350px"/>
                         </div>
-                        <div class="mt-20 col-lg-6  text-justify">
+                        <div class="mt-20 col-lg-6">
                             <h4 class="text-center">{{ artc.head }}</h4>
-                            <div class="art-text">
-                                {{ artc.text|safe|truncatechars_html:220 }}
+                            <div class="art-text text-left">
+                                {{ artc.text|safe|truncatechars_html:400 }}
                             </div>
                         </div>
-                        <div class="row mb-20 info col-lg-12">
+                        <div class="row mb-20 mt-20 info col-lg-12">
+                            {% if artc.date %}
                             <div class="col-lg-3 text-center" style="height: 80%">
-                                {{ artc.date }}
+                                <i class="fa fa-calendar" style="padding-right: 10px"></i>{{ artc.date }}
                             </div>
+                            {% endif %}
+                            {% if artc.tag_key.head %}
                             <div class="col-lg-3 text-center">
-                                <a class="tag-item-link"><i class="fa fa-tag" style="padding-right: 10px"></i>{{ artc.tag_key.head }}</a>
+                                <a href="{% url 'articles' artc.tag_key.id %}" title="{% url 'articles' artc.tag_key.id %}" class="text-center tag-item-link"><i class="fa fa-tag" style="padding-right: 10px"></i>{{ artc.tag_key.head }}</a>
                             </div>
+                            {% endif %}
+                            {% if artc.facebook_link %}
+                            <div class="col-lg-2 text-center">
+                                <a href="{{ artc.facebook_link }}" title="{{ artc.facebook_link }}" class="tag-item-link"><i class="fa fa-facebook-official" style="padding-right: 10px"></i>{% trans "facebook"%}</a>
+                            </div>
+                            {% endif %}
 {#                            <div class="col-lg-6 text-center">#}
 {#                                <a class="but-article">Подробнее</a>#}
 {#                            </div>#}
@@ -75,4 +88,5 @@
         {% csrf_token %}
         </form>
     </div>
+</div>
 {% endblock %}

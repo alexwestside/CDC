@@ -2,14 +2,18 @@
 {% load staticfiles %}
 {% load i18n %}
 {% block content %}
-<div style="background:  url({% static 'img/bg_project.jpg' %}) center/cover">
+    <div style="background:  url({{ gallery.img_back.url }}) center/cover fixed">
         <div class="jumbotron text-center" style="background: rgba(0, 0, 0, 0.3)">
           <div class="jumbo-content">
-            <h1 class="">Цены</h1>
-            <p>Цены CDC</p>
+            {% if  gallery.head %}
+                <h1 class="">{{ gallery.head }}</h1>
+            {% endif %}
+            {% if  gallery.text %}
+                <p>{{ gallery.text }}</p>
+            {% endif %}
           </div>
         </div>
-</div>
+    </div>
 <div class="container">
 <div class="row">
             <div class="col-lg-3 service-list">

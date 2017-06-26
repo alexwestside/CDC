@@ -17,19 +17,32 @@ def home(request):
     missions = Mission.objects.all()
     circles = Circle.objects.all()
     projects = Img_project.objects.filter(general=True, project_key__main=True)
+    first_ard = Contacts.objects.first()
+    phones = Phone.objects.filter(contact_key=first_ard.id)
+    email = Email.objects.filter(contact_key=first_ard.id)
+    partners = Partner.objects.all()
+    massage_form = Form_cont_main.objects.filter(form_name='message').first()
+    call_form = Form_cont_main.objects.filter(form_name='call').first()
     return render(request, "home.html", locals())
 
 
 def projects(request):
     page = 1
     projects = Img_project.objects.filter(general=True)
+    gallery = Project_main.objects.first()
     paginator = Paginator(projects, 4)
     project_pagi = paginator.page(page)
     categories = Category_project.objects.all()
+    first_ard = Contacts.objects.first()
+    phones = Phone.objects.filter(contact_key=first_ard.id)
+    email = Email.objects.filter(contact_key=first_ard.id)
+    massage_form = Form_cont_main.objects.filter(form_name='form').first()
+    call_form = Form_cont_main.objects.filter(form_name='call').first()
     return render(request, "projects.html", locals())
 
 
 def price(request, price_l='365'):
+    gallery = Price_main.objects.first()
     prices = Price.objects.all()
     price_it = Price_item.objects.all()
     profit = Profit.objects.all()
@@ -37,14 +50,25 @@ def price(request, price_l='365'):
     if price_l != '365':
         additational = Price_add.objects.get(id=price_l)
     print price_l
+    first_ard = Contacts.objects.first()
+    phones = Phone.objects.filter(contact_key=first_ard.id)
+    email = Email.objects.filter(contact_key=first_ard.id)
+    massage_form = Form_cont_main.objects.filter(form_name='form').first()
+    call_form = Form_cont_main.objects.filter(form_name='call').first()
     return render(request, "price.html", locals())
 
 
 def service(request):
+    gallery = Service_main.objects.first()
     start_id = Service.objects.last()
     services = Service.objects.all().order_by('-id')
     service_current = Service.objects.last()
     print service_current
+    first_ard = Contacts.objects.first()
+    phones = Phone.objects.filter(contact_key=first_ard.id)
+    email = Email.objects.filter(contact_key=first_ard.id)
+    massage_form = Form_cont_main.objects.filter(form_name='form').first()
+    call_form = Form_cont_main.objects.filter(form_name='call').first()
     return render(request, "service.html", locals())
 
 
@@ -73,10 +97,73 @@ def projects_pagi(request):
     return JsonResponse(cat, safe=False)
 
 
-def articles(request):
+def articles(request, order='all'):
+    gallery = Article_main.objects.first()
     page = 1
-    article = Articles.objects.filter(general=True).order_by('-date')
+    if order == 'all':
+        article = Articles.objects.filter(general=True).order_by('-date')
+    else:
+        article = Articles.objects.filter(tag_key_id=order).order_by('-date')
     paginator = Paginator(article, 4)
     articles_pagi = paginator.page(page)
     categories = Articles_tag.objects.all()
+    first_ard = Contacts.objects.first()
+    phones = Phone.objects.filter(contact_key=first_ard.id)
+    email = Email.objects.filter(contact_key=first_ard.id)
+    massage_form = Form_cont_main.objects.filter(form_name='form').first()
+    call_form = Form_cont_main.objects.filter(form_name='call').first()
     return render(request, "articles.html", locals())
+
+
+def contact(request):
+    first_ard = Contacts.objects.first()
+    contacts_obj = Contacts.objects.get(id=first_ard.id)
+    adress = Adres.objects.filter(contact_key=first_ard.id)
+    phones = Phone.objects.filter(contact_key=first_ard.id)
+    email = Email.objects.filter(contact_key=first_ard.id)
+    massage_form = Form_cont_main.objects.filter(form_name='form').first()
+    call_form = Form_cont_main.objects.filter(form_name='call').first()
+    return render(request, "contact.html", locals())
+
+
+def mass(request):
+    print request.POST
+    data = request.POST
+    phone = data.get('feed-phone')
+    link = data.get('feed-link')
+    send_mail(
+        "Вам оставили контакты для обратной связи",
+        phone + "\n" + "Page of site" + " " + "www.cdc.energy" + link,
+        settings.EMAIL_HOST_USER,
+        ['maxkaliberda1@gmail.com',],
+        fail_silently=False
+    )
+    cat = []
+    text_data = Form_cont_main.objects.filter(form_name='call').first()
+    print text_data.text_ans
+    cat = [{'text_data': text_data.text_ans}]
+    print cat
+    return JsonResponse(cat, safe=False)
+
+
+def massgen(request):
+    print request.POST
+    data = request.POST
+    phone = data.get('form-phone')
+    name = data.get('form-name')
+    email = data.get('form-email')
+    subject = data.get('form-subject')
+    message = data.get('form-message')
+    send_mail(
+        "Вам оставили контакты для обратной связи",
+        phone + "\n" + email + "\n" + subject + "\n" + message,
+        settings.EMAIL_HOST_USER,
+        ['maxkaliberda1@gmail.com', ],
+        fail_silently=False
+    )
+    cat = []
+    text_data = Form_cont_main.objects.filter(form_name='message').first()
+    print text_data.text_ans
+    cat = [{'text_data': text_data.text_ans}]
+    print cat
+    return JsonResponse(cat, safe=False)
