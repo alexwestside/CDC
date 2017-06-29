@@ -25,18 +25,17 @@
         <img class="img-top-ar" src="{% static 'img/down-white.png' %}">
     </div>
 </div>
-<div class="menu visible-lg">
+<div class="menu visible-md visible-lg">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3">
-
+            <div class="col-lg-3 col-md-1">
             </div>
             {% for phone in phones %}
-                <div class="col-lg-2">
+                <div class="col-lg-2 col-md-3">
                     <a class="phone-nav" href="tel:{{ contact.phone }}"><i class="fa fa-phone"></i>{{ phone.phone }}</a>
                 </div>
             {% endfor %}
-            <div class="col-lg-2 text-center" style="">
+            <div class="col-lg-2 col-md-2 text-center" style="">
                 <form id='lang_uk' action='/i18n/setlang/' style="display: inline" method='POST'>{% csrf_token %}
                     <input type='hidden' name='language' value='uk'/>
                     <a  class="lang-change" href='#' title='Ukraine' onclick="document.getElementById('lang_uk').submit()">
@@ -81,7 +80,7 @@
                     </a>
                 </li>
                 <li class="text-center">
-                    <a href="{% url 'projects' %}" title="{% trans "ПРОЕКТЫ" %}" class="nav-but">{% trans "ПРОЕКТЫ" %}
+                    <a href="{% url 'projects' 'all' 1 %}" title="{% trans "ПРОЕКТЫ" %}" class="nav-but">{% trans "ПРОЕКТЫ" %}
                         <div class="visible-lg visible-md magic-line"></div>
                     </a>
                 </li>
@@ -96,7 +95,7 @@
                     </a>
                 </li>
                 <li class="text-center">
-                    <a href="{% url 'articles' 'all' %}" class="nav-but">{% trans "НОВОВСТИ" %}
+                    <a href="{% url 'articles' 'all' 1 %}" class="nav-but">{% trans "НОВОСТИ" %}
                         <div class="visible-lg visible-md magic-line"></div>
                     </a>
                 </li>
@@ -113,12 +112,12 @@
 {% endblock%}
 <div class="container mt-20 mb-20 main-form-contact">
     <h2 class="text-center">{{ massage_form.head_preview }}</h2>
-    <div class="col-lg-6 col-lg-offset-3">
+    <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3">
         <p class="mt-20 mb-20 text-center call-back-text">
             {{ massage_form.text_preview }}
         </p>
     </div>
-    <div class="col-lg-12">
+    <div class="col-lg-12 col-md-12">
         <!-- Contact FORM -->
         <!-- Contact FORM -->
         <form name="form-name" class="contact-form" id="contact" role="form" method="POST">
@@ -133,19 +132,19 @@
                 <i class="fa fa-exclamation-circle left" style="color: #e1534f;"></i>There was a problem validating the form please check!
             </h6>
             <!-- END MAIL SENDING UNSUCCESSFULL -->
-            <div class="form-field-wrapper col-lg-4">
+            <div class="form-field-wrapper col-lg-4 col-md-4">
                 <input class="input-md form-full" id="form-name" type="text" name="form-name" placeholder="Ваше Имя" required>
             </div>
-            <div class="form-field-wrapper col-lg-4">
+            <div class="form-field-wrapper col-lg-4 col-md-4">
                 <input class="input-md form-full" id="form-email" type="email" name="form-email" placeholder="Ваш Email" Email required>
             </div>
-            <div class="form-field-wrapper col-lg-4">
+            <div class="form-field-wrapper col-lg-4 col-md-4">
                 <input class="input-md form-full" id="form-phone" type="text" name="form-phone" placeholder="Ваш Телефон" Phone required>
             </div>
-            <div class="form-field-wrapper col-lg-12">
+            <div class="form-field-wrapper col-lg-12 col-md-12">
                 <input class="input-md form-full" id="form-subject" type="text" name="form-subject" placeholder="Тема письма">
             </div>
-            <div class="form-field-wrapper col-lg-12">
+            <div class="form-field-wrapper col-lg-12 col-md-12">
                 <textarea class="form-full" id="form-message" rows="7" name="form-message" placeholder="Напишите нам" ></textarea>
             </div>
             <div class="text-center">
@@ -177,10 +176,10 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
         <div class="modal-body row">
-            <div class="col-lg-3 text-center">
+            <div class="col-lg-3 col-md-3 text-center">
                 <img class="img-cont-form" src="{% static 'img/operator.png' %}"/>
             </div>
-            <div class="col-lg-9">
+            <div class="col-lg-9 col-md-9">
                 <h3 class="head-contact text-center mb-20">{{ call_form.text_preview }}</h3>
                 <form name="feed" class="text-center contact-form" id="feed" role="form" method="POST">
                     {% csrf_token %}
@@ -206,17 +205,17 @@
 <footer>
     <div class="container">
         <div class="row foter-adr text-center">
-            <div class="col-lg-2 col-lg-offset-1">
+            <div class="col-lg-2 col-lg-offset-1 col-md-2 col-md-offset-1">
                 <img class="mt-30" src="{% static 'img/logocdc.png' %}"/>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-2 col-md-2">
                  <ul   class="nav">
                     <li class=" text-center">
                         <a href="{% url 'home' %}" class="foot-but">{% trans "ГЛАВНАЯ" %}
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="{% url 'projects' %}" title="{% trans "ПРОЕКТЫ" %}" class="foot-but">{% trans "ПРОЕКТЫ" %}
+                        <a href="{% url 'projects' 'all' 1 %}" title="{% trans "ПРОЕКТЫ" %}" class="foot-but">{% trans "ПРОЕКТЫ" %}
                         </a>
                     </li>
                     <li class="text-center">
@@ -228,7 +227,7 @@
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="{% url 'articles' 'all' %}" class="foot-but">{% trans "НОВОВСТИ" %}
+                        <a href="{% url 'articles' 1 1 %}" class="foot-but">{% trans "НОВОСТИ" %}
                         </a>
                     </li>
                     <li class=" text-center">
@@ -237,7 +236,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-3 col-md-3">
                  <ul   class="nav">
                   {% for phone in phones %}
                     <li class="text-center">
@@ -258,7 +257,7 @@
             </div>
             <div class="col-md-4">
                 <div class="map">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2135.647170009473!2d30.477365811782654!3d50.46481172099501!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4ce7874db2bc1%3A0xa02155f1f00d9a04!2z0LLRg9C70LjRhtGPINCc0LXQu9GM0L3QuNC60L7QstCwLCAxMiwg0JrQuNGX0LI!5e0!3m2!1sru!2sua!4v1498405926600"
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2540.7130154902875!2d30.523297315731117!3d50.44644597947481!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4ce540e2b7079%3A0xc9c5c8341ef2900c!2z0LLRg9C70LjRhtGPINCX0LDQvdGM0LrQvtCy0LXRhtGM0LrQvtGXLCA1LzIsINCa0LjRl9Cy!5e0!3m2!1sru!2sua!4v1498770082366"
                             width="100%" height="170px" frameborder="0" style="border:0" allowfullscreen></iframe>
                     <!-- END Contact FORM -->
                 </div>
@@ -267,11 +266,8 @@
     </div>
 </footer>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
-
-
         <!-- Bootstrap bootstrap-touch-slider Slider Main JS File -->
-        <script src="bootstrap-touch-slider.js"></script>
-
+        <script src="{% static 'js/bootstrap-touch-slider.js' %}"></script>
         <script type="text/javascript">
             $('#bootstrap-touch-slider').bsTouchSlider();
         </script>

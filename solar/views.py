@@ -3,7 +3,7 @@ from django.core import serializers
 from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.shortcuts import render
-from models import *
+from solar.models import *
 from django.core.mail import send_mail
 from django.conf import settings
 from django.views.decorators.cache import cache_page
@@ -26,12 +26,18 @@ def home(request):
     return render(request, "home.html", locals())
 
 
-def projects(request):
-    page = 1
-    projects = Img_project.objects.filter(general=True)
+def projects(request, order, page_pr):
+    if order == 'all':
+        projects = Img_project.objects.filter(general=True)
+    else:
+        projects = Img_project.objects.filter(project_key__category_id=order).order_by('-id')
+    if order != 'all':
+        categor_all_flag = 'hidden'
+    else:
+        categor_id_flag = 'hidden'
     gallery = Project_main.objects.first()
     paginator = Paginator(projects, 4)
-    project_pagi = paginator.page(page)
+    project_pagi = paginator.page(page_pr)
     categories = Category_project.objects.all()
     first_ard = Contacts.objects.first()
     phones = Phone.objects.filter(contact_key=first_ard.id)
@@ -49,7 +55,7 @@ def price(request, price_l='365'):
     additational_cats = Price_add.objects.all()
     if price_l != '365':
         additational = Price_add.objects.get(id=price_l)
-    print price_l
+    print (price_l)
     first_ard = Contacts.objects.first()
     phones = Phone.objects.filter(contact_key=first_ard.id)
     email = Email.objects.filter(contact_key=first_ard.id)
@@ -63,7 +69,7 @@ def service(request):
     start_id = Service.objects.last()
     services = Service.objects.all().order_by('-id')
     service_current = Service.objects.last()
-    print service_current
+    print (service_current)
     first_ard = Contacts.objects.first()
     phones = Phone.objects.filter(contact_key=first_ard.id)
     email = Email.objects.filter(contact_key=first_ard.id)
@@ -75,7 +81,7 @@ def service(request):
 def service_sort(request):
     cat = []
     data = request.POST
-    print data['id']
+    print (data['id'])
     service_item = Service.objects.get(id=data['id'])
     cat = [{'head': service_item.head, 'text': service_item.text}]
     return JsonResponse(cat, safe=False)
@@ -84,28 +90,29 @@ def service_sort(request):
 def projects_pagi(request):
     cat = []
     data = request.POST
-    print data['category']
+    print (data['category'])
     if data['category'] == 'all':
         projects = Img_project.objects.filter(general=True)
     else:
         projects = Img_project.objects.filter(general=True, project_key__category_id=data['category'])
     paginator = Paginator(projects, 4)
     project_pagi = paginator.page(data['page'])
-    print project_pagi
     cat = [{'id': item.project_key_id, 'img': item.img.url, 'head_main': item.project_key.head, 'text': item.project_key.text} for item in project_pagi]
-    print cat
     return JsonResponse(cat, safe=False)
 
 
-def articles(request, order='all'):
+def articles(request, order, page_art):
     gallery = Article_main.objects.first()
-    page = 1
     if order == 'all':
         article = Articles.objects.filter(general=True).order_by('-date')
     else:
         article = Articles.objects.filter(tag_key_id=order).order_by('-date')
-    paginator = Paginator(article, 4)
-    articles_pagi = paginator.page(page)
+    if order != 'all':
+        categor_all_flag = 'hidden'
+    else:
+        categor_id_flag = 'hidden'
+    paginator = Paginator(article, 5)
+    articles_pagi = paginator.page(page_art)
     categories = Articles_tag.objects.all()
     first_ard = Contacts.objects.first()
     phones = Phone.objects.filter(contact_key=first_ard.id)
@@ -127,7 +134,7 @@ def contact(request):
 
 
 def mass(request):
-    print request.POST
+    print (request.POST)
     data = request.POST
     phone = data.get('feed-phone')
     link = data.get('feed-link')
@@ -140,14 +147,14 @@ def mass(request):
     )
     cat = []
     text_data = Form_cont_main.objects.filter(form_name='call').first()
-    print text_data.text_ans
+    print (text_data.text_ans)
     cat = [{'text_data': text_data.text_ans}]
-    print cat
+    print (cat)
     return JsonResponse(cat, safe=False)
 
 
 def massgen(request):
-    print request.POST
+    print (request.POST)
     data = request.POST
     phone = data.get('form-phone')
     name = data.get('form-name')
@@ -163,7 +170,7 @@ def massgen(request):
     )
     cat = []
     text_data = Form_cont_main.objects.filter(form_name='message').first()
-    print text_data.text_ans
+    print (text_data.text_ans)
     cat = [{'text_data': text_data.text_ans}]
-    print cat
+    print (cat)
     return JsonResponse(cat, safe=False)

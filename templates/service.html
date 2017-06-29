@@ -16,12 +16,12 @@
     </div>
     <div class="container projects">
         <div class="row">
-            <div class="col-lg-3 service-list">
+            <div class="col-md-3 service-list">
             {% for service in services %}
                 <a href="javascript: service_sort({{ service.id }})" class="category-item-project">{{ service.head }}</a>
             {% endfor %}
             </div>
-            <div class="col-lg-9 service-item">
+            <div class="col-md-9 service-item">
                 <h2 class="text-center">{{ service_current.head }}</h2>
                 <div class="service-cont text-justify">
                     {{ service_current.text|safe }}

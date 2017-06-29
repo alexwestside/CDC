@@ -1,15 +1,14 @@
 $(document).ready(function() {
     $(document).on("click", ".arrow-menu", function (e) {
             console.log('fuck');
-            if ($('.menu').hasClass('visible-lg')) {
-                $('.menu').removeClass('visible-lg').slideDown();
+            if ($('.menu').hasClass('visible-md', 'visible-lg')){
+                $('.menu').removeClass('visible-md', 'visible-lg').slideDown();
             }
-            else {
-                $('.menu').addClass('visible-lg').slideUp();
+            else{
+                $('.menu').addClass('visible-md', 'visible-lg').slideUp();
             }
         });
 //    Это наше верхнее меню на телефоне !!!!!!!!!!!
-
     var delay = 1000; // Задержка прокрутки
     $(window).scroll(function () {
           if ($(this).scrollTop() > 100) {

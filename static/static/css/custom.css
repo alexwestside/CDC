@@ -217,11 +217,6 @@ body{
     height: 2px;
 }
 
-.nav-but:hover .magic-line, .nav-but:focus .magic-line, .nav-but:active .magic-line{
-    width: 100%;
-    transition: 0.5s;
-}
-
 .nav-but:hover, .nav-but:focus, .nav-but:active{
 background-color: rgba(255, 255, 255, 0)!important;
     /*border-bottom: 2px solid rgba(16, 119, 0, 0.26);*/

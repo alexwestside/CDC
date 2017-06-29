@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from modeltranslation.translator import translator, TranslationOptions
-from models import *
-
+from solar.models import Banner, About, Project, Category_project
 
 class BannerTranslationOptions(TranslationOptions):
     fields = ('head', 'text', 'text_button')
 translator.register(Banner, BannerTranslationOptions)
-
 
 class AboutTranslationOptions(TranslationOptions):
     fields = ('head', 'text')

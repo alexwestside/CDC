@@ -104,6 +104,7 @@
 }
 
 #popup__toggle{
+    z-index: 999;
   bottom:35px;
   left: 170px;
   position:fixed;}

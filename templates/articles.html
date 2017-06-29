@@ -16,37 +16,37 @@
     </div>
     <div class="container projects">
         <div class="row">
-            <div class="col-lg-3 article-list">
-             <a href="{% url 'articles' 'all' %}" class="category-item-project">{% trans "Все новости" %}</a>
+            <div class="col-lg-3 col-md-3 article-list">
+             <a href="{% url 'articles' 'all' 1 %}" class="category-item-project">{% trans "Все новости" %}</a>
             {% for category in categories %}
-                <a href="{% url 'articles' category.id %}" title="{% url 'articles' category.id %}" class="category-item-project">{{ category.head }}</a>
+                <a href="{% url 'articles' category.id 1 %}" title="{% url 'articles' 1 category.id %}" class="category-item-project">{{ category.head }}</a>
             {% endfor %}
             </div>
-            <div class="col-lg-9 article-item">
-                {% for artc in article %}
+            <div class="col-lg-9 col-md-9 article-item">
+                {% for artc in articles_pagi %}
                     <div class="row article-cont text-center">
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-md-6">
                             <img class="mt-20 mb-20" src="{{ artc.img.url }}" style="max-width: 100%; width: 350px"/>
                         </div>
-                        <div class="mt-20 col-lg-6">
+                        <div class="mt-20 col-lg-6 col-md-6">
                             <h4 class="text-center">{{ artc.head }}</h4>
                             <div class="art-text text-left">
                                 {{ artc.text|safe|truncatechars_html:400 }}
                             </div>
                         </div>
-                        <div class="row mb-20 mt-20 info col-lg-12">
+                        <div class="row mb-20 mt-20 info col-lg-12 col-md-12">
                             {% if artc.date %}
-                            <div class="col-lg-3 text-center" style="height: 80%">
+                            <div class="col-lg-3 col-md-3 text-center" style="height: 80%">
                                 <i class="fa fa-calendar" style="padding-right: 10px"></i>{{ artc.date }}
                             </div>
                             {% endif %}
                             {% if artc.tag_key.head %}
-                            <div class="col-lg-3 text-center">
-                                <a href="{% url 'articles' artc.tag_key.id %}" title="{% url 'articles' artc.tag_key.id %}" class="text-center tag-item-link"><i class="fa fa-tag" style="padding-right: 10px"></i>{{ artc.tag_key.head }}</a>
+                            <div class="col-lg-3 col-md-3 text-center">
+                                <a href="{% url 'articles' artc.tag_key.id 1 %}" title="{% url 'articles' 1 artc.tag_key.id %}" class="text-center tag-item-link"><i class="fa fa-tag" style="padding-right: 10px"></i>{{ artc.tag_key.head }}</a>
                             </div>
                             {% endif %}
                             {% if artc.facebook_link %}
-                            <div class="col-lg-2 text-center">
+                            <div class="col-lg-2 col-md-3 text-center">
                                 <a href="{{ artc.facebook_link }}" title="{{ artc.facebook_link }}" class="tag-item-link"><i class="fa fa-facebook-official" style="padding-right: 10px"></i>{% trans "facebook"%}</a>
                             </div>
                             {% endif %}
@@ -57,9 +57,9 @@
                     </div>
                 {% endfor %}
             </div>
-            <div class="col-lg-8 col-lg-offset-4 text-center">
+            <div class="col-lg-8 col-lg-offset-4 col-md-8 col-md-offset-4 text-center">
                 <nav aria-label="Page navigation">
-                  <ul class="pagination">
+                  <ul class="pagination {{ categor_all_flag }}">
                     <li class="hide">
                       <a href="#" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
@@ -67,12 +67,35 @@
                     </li>
                       {% for page in articles_pagi.paginator.page_range %}
                         {% if page == articles_pagi.number %}
-                            <li class="active">
-                                <a  id="{{ page }}" href="" data-page="{{ page }}">{{ page }}</a>
+                            <li class="active ">
+                                <a id="{{ page }}" href="{% url 'articles' 'all' page %}" title="{% url 'articles' page 1 %}" data-page="{{ page }}">{{ page }}</a>
                             </li>
                         {% else %}
                              <li>
-                                <a id="{{ page }}" href="" id="#pagi_item" data-page="{{ page }}">{{ page }}</a>
+                                <a id="{{ page }}" href="{% url 'articles' 'all' page %}" title="{% url 'articles' page 1 %}" id="#pagi_item" data-page="{{ page }}">{{ page }}</a>
+                            </li>
+                        {% endif %}
+                      {% endfor %}
+                    <li class="hide">
+                      <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li>
+                  </ul>
+                <ul class="pagination {{ categor_id_flag }}">
+                    <li class="hide">
+                      <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                    </li>
+                      {% for page in articles_pagi.paginator.page_range %}
+                        {% if page == articles_pagi.number %}
+                            <li class="active ">
+                                <a id="{{ page }}" href="{% url 'articles' order page %}" title="{% url 'articles' page 1 %}" data-page="{{ page }}">{{ page }}</a>
+                            </li>
+                        {% else %}
+                             <li>
+                                <a id="{{ page }}" href="{% url 'articles' order page %}" title="{% url 'articles' page 1 %}" id="#pagi_item" data-page="{{ page }}">{{ page }}</a>
                             </li>
                         {% endif %}
                       {% endfor %}

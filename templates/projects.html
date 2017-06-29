@@ -19,7 +19,7 @@
             <h3></h3>
             <div class="col-lg-4">
             {% for category in categories %}
-                <a href="javascript: pagi(1, 1, '{{ category.id }}')" class="category-item-project">{{ category.head }}</a>
+                <a href="{% url 'projects' category.id 1 %}" class="category-item-project">{{ category.head }}</a>
             {% endfor %}
             </div>
             <div class="col-lg-8" id="projects">
@@ -38,8 +38,8 @@
                 {% endfor %}
             </div>
              <div class="col-lg-8 col-lg-offset-4 text-center">
-                <nav aria-label="Page navigation">
-                  <ul class="pagination">
+                <nav aria-label="Page navigation" id="pagi1">
+                  <ul class="pagination {{ categor_all_flag }}">
                     <li class="hide">
                       <a href="#" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
@@ -48,11 +48,34 @@
                       {% for page in project_pagi.paginator.page_range %}
                         {% if page == project_pagi.number %}
                             <li class="active">
-                                <a  id="{{ page }}" href="javascript: pagi({{ page }}, {{ page }}, 'all')" data-page="{{ page }}">{{ page }}</a>
+                                <a  id="{{ page }}" href="{% url 'projects' 'all' page %}" >{{ page }}</a>
                             </li>
                         {% else %}
                              <li>
-                                <a id="{{ page }}" href="javascript: pagi({{ page }}, {{ page }}, 'all')" id="#pagi_item" data-page="{{ page }}">{{ page }}</a>
+                                <a id="{{ page }}" href="{% url 'projects' 'all' page %}" id="#pagi_item" >{{ page }}</a>
+                            </li>
+                        {% endif %}
+                      {% endfor %}
+                    <li class="hide">
+                      <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li>
+                  </ul>
+                <ul class="pagination {{ categor_id_flag }}">
+                    <li class="hide">
+                      <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                    </li>
+                      {% for page in project_pagi.paginator.page_range %}
+                        {% if page == project_pagi.number %}
+                            <li class="active">
+                                <a  id="{{ page }}" href="{% url 'projects' order page %}" >{{ page }}</a>
+                            </li>
+                        {% else %}
+                             <li>
+                                <a id="{{ page }}" href="{% url 'projects' order page %}" id="#pagi_item" >{{ page }}</a>
                             </li>
                         {% endif %}
                       {% endfor %}

@@ -6,7 +6,7 @@ from django.contrib import admin
 from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
 from modeltranslation.admin import TabbedTranslationAdmin
-from models import *
+from solar.models import *
 from import_export.admin import ImportExportModelAdmin
 from import_export import resources
 from import_export import fields

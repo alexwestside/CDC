@@ -68,7 +68,7 @@
             <div class="row">
                 {% for about in abouts %}
                 <h1 class="text-center">{{ about.head }}</h1>
-                <div class="col-lg-offset-2 col-lg-8 text-center">
+                <div class="col-md-offset-2 col-md-8 text-center">
                     <div class="about-cont text-center">
                         {{ about.text|safe }}
                     </div>
@@ -81,7 +81,7 @@
                 {% if circles %}
                     {% for circle in circles %}
                     <h1 class="text-center">{{ about.head }}</h1>
-                    <div class="col-lg-4 text-center">
+                    <div class="col-md-4 text-center">
                         <div class="counter text-center" data-count="{{ circle.count }}">0</div>
                         <div class="magic-line-circle text-center"></div>
                         <div class="circle-text text-center">
@@ -97,7 +97,7 @@
                 {% if missions %}
                     {% for mission in missions %}
                     <h2 class="text-center">{{ mission.head }}</h2>
-                    <div class="col-lg-offset-2 col-lg-8 text-center">
+                    <div class="col-md-offset-2 col-md-8 text-center">
                         <div class="about-cont text-center">
                             {{ mission.text|safe }}
                         </div>
@@ -112,7 +112,7 @@
             <h2 class="text-center mb-30">{% trans 'НАШИ ПРОЕКТЫ' %}</h2>
             {% for project in projects %}
                 <a class="item-project-a">
-                <div class="item-project col-lg-6" style="background: url({{ project.img.url }}) center/cover no-repeat">
+                <div class="item-project col-md-6" style="background: url({{ project.img.url }}) center/cover no-repeat">
                       <div class="item-pr-cont">
                           <h3 class="text-center">{{ project.project_key.head }}</h3>
                           <div class="magic-line"></div>
@@ -123,8 +123,8 @@
                 </div>
                 </a>
             {% endfor %}
-            <div class="text-center col-lg-12 project-but-block">
-                <a href="{% url 'projects' %}" class="but-project">{% trans 'ВСЕ ПРОЕТКЫ' %}</a>
+            <div class="text-center col-md-12 project-but-block">
+                <a href="{% url 'projects' 'all' 1 %}" class="but-project">{% trans 'ВСЕ ПРОЕТКЫ' %}</a>
             </div>
         </div>
         </div>
@@ -133,9 +133,11 @@
             <div class="row text-center">
                 {% if partners %}
                     {% for parnter in partners %}
-                        <div class="col-lg-4">
+                        <div class="col-md-4">
                             <div class="partner-item">
-                                <img src="{{ parnter.img.url }}"/>
+                                {% if parnter.img %}
+                                    <img src="{{ parnter.img.url }}"/>
+                                {% endif %}
                                 <h3>
                                     {{ partner.head }}
                                 </h3>
@@ -145,15 +147,6 @@
                         </div>
                     {% endfor %}
                 {% endif %}
-                <div class="col-lg-4 col-lg-offset-4">
-                    <div class="partner-item">
-                    <h3>
-                        Основа электро
-                    </h3>
-                    <div class="magic-line-partn mb-20"></div>
-                    <p>кабельная продукция</p>
-                    </div>
-                </div>
             </div>
         </div>
         <script type="text/javascript">
