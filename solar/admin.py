@@ -360,3 +360,20 @@ class ContactsAdmin(ImportExportModelAdmin, SummernoteModelAdmin):
     inlines = [AdresInline, PhoneInline, EmailInline]
 admin.site.register(Contacts, ContactsAdmin)
 
+
+class MetatitleResource(resources.ModelResource):
+    class Meta:
+        model = Metatitle
+        fields = [field.name for field in Metatitle._meta.fields]
+        import_id_fields = [
+            'id', ]  # it means that the instance could be updated if the instance with the value in this filed exists
+
+
+class MetatitleAdmin(ImportExportModelAdmin):
+    resource_class = MetatitleResource
+    list_display = [field.name for field in Metatitle._meta.fields]
+    search_fields = [field.name for field in Metatitle._meta.fields]
+    list_filter = [field.name for field in Metatitle._meta.fields]
+
+admin.site.register(Metatitle, MetatitleAdmin)
+

@@ -78,7 +78,6 @@ class Project(models.Model):
     head = models.CharField(max_length=500, null=True, blank=True)
     category = models.ForeignKey(Category_project, null=True, blank=True)
     text = models.TextField(null=True, blank=True)
-    content = models.TextField(null=True, blank=True)
     main = models.BooleanField(default=False)
 
     def __unicode__(self):
@@ -354,3 +353,15 @@ class Adres(models.Model):
         verbose_name = 'Адрес'
         verbose_name_plural = 'Адреса'
 
+
+class Metatitle(models.Model):
+    keywords = models.TextField(blank=True, default='')
+    description = models.TextField(blank=True, default='')
+    img = models.ImageField(null=True, blank=True)
+    title = models.CharField(max_length=500, null=True, blank=True)
+
+    def __unicode__(self):
+        return '%s' % self.title
+
+    class Meta:
+        db_table = 'metatitle'

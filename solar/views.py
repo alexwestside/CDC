@@ -12,6 +12,7 @@ from django.core.paginator import Paginator
 
 
 def home(request):
+    meta_title = Metatitle.objects.first()
     banners = Banner.objects.all()
     abouts = About.objects.all()
     missions = Mission.objects.all()
@@ -27,6 +28,7 @@ def home(request):
 
 
 def projects(request, order, page_pr):
+    meta_title = Metatitle.objects.first()
     if order == 'all':
         projects = Img_project.objects.filter(general=True)
     else:
@@ -48,6 +50,7 @@ def projects(request, order, page_pr):
 
 
 def price(request, price_l='365'):
+    meta_title = Metatitle.objects.first()
     gallery = Price_main.objects.first()
     prices = Price.objects.all()
     price_it = Price_item.objects.all()
@@ -65,6 +68,7 @@ def price(request, price_l='365'):
 
 
 def service(request):
+    meta_title = Metatitle.objects.first()
     gallery = Service_main.objects.first()
     start_id = Service.objects.last()
     services = Service.objects.all().order_by('-id')
@@ -102,6 +106,7 @@ def projects_pagi(request):
 
 
 def articles(request, order, page_art):
+    meta_title = Metatitle.objects.first()
     gallery = Article_main.objects.first()
     if order == 'all':
         article = Articles.objects.filter(general=True).order_by('-date')
@@ -123,6 +128,7 @@ def articles(request, order, page_art):
 
 
 def contact(request):
+    meta_title = Metatitle.objects.first()
     first_ard = Contacts.objects.first()
     contacts_obj = Contacts.objects.get(id=first_ard.id)
     adress = Adres.objects.filter(contact_key=first_ard.id)

@@ -1,11 +1,11 @@
 $(document).ready(function() {
     $(document).on("click", ".arrow-menu", function (e) {
             console.log('fuck');
-            if ($('.menu').hasClass('visible-md', 'visible-lg')){
-                $('.menu').removeClass('visible-md', 'visible-lg').slideDown();
+            if ($('.menu').hasClass('visible-md')){
+                $('.menu').removeClass('visible-md').removeClass('visible-lg').slideDown();
             }
             else{
-                $('.menu').addClass('visible-md', 'visible-lg').slideUp();
+                $('.menu').addClass('visible-md').addClass('visible-md').slideUp();
             }
         });
 //    Это наше верхнее меню на телефоне !!!!!!!!!!!
