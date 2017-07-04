@@ -33,15 +33,12 @@
         </form>
     </div>
     <script>
-{#    $(document).ready(function() {#}
         function service_sort (id){
             var data = {};
             var id_el = '#' + id;
             var csrf_token = $('#csrf_getting_form').find('[name="csrfmiddlewaretoken"]').val();
             data["csrfmiddlewaretoken"] = csrf_token;
             data["id"] = id;
-{#            var email = $(this).attr('data-page');#}
-{#            e.preventDefault();#}
                     $.ajax({
                         url: '/service_sort/',
                         type: 'POST',
@@ -62,6 +59,5 @@
                         }
                         });
         }
-{#    });#}
     </script>
 {% endblock %}

@@ -395,5 +395,22 @@ class Feed_back_phoneAdmin(ImportExportModelAdmin):
 admin.site.register(Feed_back_phone, Feed_back_phoneAdmin)
 
 
+class Feed_back_letterResource(resources.ModelResource):
+    class Meta:
+        model = Feed_back_letter
+        fields = [field.name for field in Feed_back_letter._meta.fields]
+        import_id_fields = [
+            'id', ]  # it means that the instance could be updated if the instance with the value in this filed exists
+
+
+class Feed_back_letterAdmin(ImportExportModelAdmin):
+    resource_class = Feed_back_letterResource
+    list_display = [field.name for field in Feed_back_letter._meta.fields]
+    search_fields = [field.name for field in Feed_back_letter._meta.fields]
+    list_filter = [field.name for field in Feed_back_letter._meta.fields]
+
+admin.site.register(Feed_back_letter, Feed_back_letterAdmin)
+
+
 
 

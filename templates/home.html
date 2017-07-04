@@ -5,12 +5,6 @@
     <div id="bootstrap-touch-slider" class="carousel bs-slider fade  control-round indicators-line" data-ride="carousel"
          data-pause="hover" data-interval="false" xmlns="http://www.w3.org/1999/html">
             <!-- Indicators -->
-{#            <ol class="carousel-indicators">#}
-{#                <li data-target="#bootstrap-touch-slider" data-slide-to="0" class="active"></li>#}
-{#                <li data-target="#bootstrap-touch-slider" data-slide-to="1"></li>#}
-{#                <li data-target="#bootstrap-touch-slider" data-slide-to="2"></li>#}
-{#            </ol>#}
-
             <!-- Wrapper For Slides -->
             <div class="carousel-inner" role="listbox">
 
@@ -18,8 +12,6 @@
                 {% for banner in banners %}
                 <div class="item {% if banner.first == True %}active{% endif %}">
                     <!-- Slide Background -->
-{#                        <div class="item-img" style="background: url({% static 'img/solar_bg.jpg' %})"></div>#}
-{#                    <div style="height: 500px; position:absolute; background-image: url('{% static 'img/solar_bg.jpg' %}');"></div>#}
                     <img src="{{ banner.img.url }}" alt="Bootstrap Touch Slider"  class="slide-image"/>
                     <div class="bs-slider-overlay"></div>
                     <div class="container">
@@ -35,12 +27,6 @@
 {#                                <a href="http://bootstrapthemes.co/" target="_blank"  class="btn btn-primary" data-animation="animated fadeInRight">select two</a>#}
                                 {% endif %}
                             </div>
-{#                            <div data-animation="animated fadeInRight" class="panel-slide-poly">#}
-{#                                <img style="" src="{% static 'img/Poly_panel.jpg' %}">#}
-{#                            </div>#}
-{#                            <div data-animation="animated fadeInRight" class="panel-slide-mono">#}
-{#                                <img style="" src="{% static 'img/Mono_panele.jpg' %}">#}
-{#                            </div>#}
                         </div>
                     </div>
                 </div>
@@ -133,6 +119,20 @@
             <div class="row text-center">
                 {% if partners %}
                     {% for parnter in partners %}
+                        {% if forloop.counter > 3 %}
+                        <div class="col-md-6">
+                            <div class="partner-item">
+                                {% if parnter.img %}
+                                    <img src="{{ parnter.img.url }}"/>
+                                {% endif %}
+                                <h3>
+                                    {{ parnter.head }}
+                                </h3>
+                                <div class="magic-line-partn mb-20"></div>
+                                <p>{{ parnter.text }}</p>
+                            </div>
+                        </div>
+                        {% else %}
                         <div class="col-md-4">
                             <div class="partner-item">
                                 {% if parnter.img %}
@@ -145,6 +145,7 @@
                                 <p>{{ parnter.text }}</p>
                             </div>
                         </div>
+                        {% endif %}
                     {% endfor %}
                 {% endif %}
             </div>

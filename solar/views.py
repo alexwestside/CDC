@@ -140,7 +140,7 @@ def contact(request):
 
 
 def mass(request):
-    print (request.POST)
+    print(request.POST)
     data = request.POST
     phone = data.get('feed-phone')
     link = data.get('feed-link')
@@ -151,19 +151,19 @@ def mass(request):
         ['info@cdc.energy',],
         fail_silently=False
     )
-    date = datetime.datetime.now()
-    print(date)
-    #Feed_back.objects.create(name="", phone=phone, email="")
+    date_f = datetime.datetime.now()
+    print(date_f)
+    Feed_back_phone.objects.create(phone=phone, date_f=date_f)
     cat = []
     text_data = Form_cont_main.objects.filter(form_name='call').first()
-    print (text_data.text_ans)
+    print(text_data.text_ans)
     cat = [{'text_data': text_data.text_ans}]
     print (cat)
     return JsonResponse(cat, safe=False)
 
 
 def massgen(request):
-    print (request.POST)
+    print(request.POST)
     data = request.POST
     phone = data.get('form-phone')
     name = data.get('form-name')
@@ -174,12 +174,16 @@ def massgen(request):
         "Вам оставили контакты для обратной связи",
         phone + "\n" + email + "\n" + subject + "\n" + message,
         settings.EMAIL_HOST_USER,
-        ['info@cdc.energy', ],
+        ['info@cdc.energy', 'maxkaliberda1@gmail.com'],
         fail_silently=False
     )
+    date_f = datetime.datetime.now()
+    print(date_f)
+    Feed_back_letter.objects.create(name=name, phone=phone, email=email, subject=subject, text=message, date_f=date_f)
     cat = []
     text_data = Form_cont_main.objects.filter(form_name='message').first()
-    print (text_data.text_ans)
+    print(text_data.text_ans)
     cat = [{'text_data': text_data.text_ans}]
-    print (cat)
+    print(cat)
     return JsonResponse(cat, safe=False)
+

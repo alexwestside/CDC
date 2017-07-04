@@ -75,7 +75,7 @@
                 <span class="grey-bg icon-bar"></span>
                 <span class="grey-bg icon-bar"></span>
             </button>
-            <a id = "navbar_l" class="navbar-brand" href="{% url 'home' %}">
+            <a id = "navbar_l" class="navbar-brand" href="{% url 'home' %}" title="{% url 'home' %}">
                 <img class="img-log" src="{% static 'img/logocdc.png' %}"/>
             </a>
         </div>
@@ -213,12 +213,14 @@
     <div class="container">
         <div class="row foter-adr text-center">
             <div class="col-lg-2 col-lg-offset-1 col-md-2 col-md-offset-1">
-                <img class="mt-30" src="{% static 'img/logocdc.png' %}"/>
+                 <a href="{% url 'home' %}" title="{% url 'home' %}">
+                    <img class="mt-30" src="{% static 'img/logocdc.png' %}"/>
+                 </a>
             </div>
             <div class="col-lg-2 col-md-2">
                  <ul   class="nav">
                     <li class=" text-center">
-                        <a href="{% url 'home' %}" class="foot-but">{% trans "ГЛАВНАЯ" %}
+                        <a href="{% url 'home' %}" class="foot-but" title="{% trans "ГЛАВНАЯ" %}">{% trans "ГЛАВНАЯ" %}
                         </a>
                     </li>
                     <li class="text-center">

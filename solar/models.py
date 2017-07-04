@@ -368,9 +368,10 @@ class Metatitle(models.Model):
 
 class Feed_back_phone(models.Model):
     phone = models.CharField(max_length=300, null=True, blank=True)
-    date_f = models.DateField(blank=True, null=True)
+    date_f = models.DateTimeField(blank=True, null=True)
     worked = models.BooleanField(default=False)
     recall = models.BooleanField(default=False)
+    comment = models.TextField(null=True, blank=True)
 
     def __unicode__(self):
         return '%s' % self.date_f
@@ -385,7 +386,8 @@ class Feed_back_letter(models.Model):
     phone = models.CharField(max_length=700, null=True, blank=True)
     subject = models.CharField(max_length=700, null=True, blank=True)
     text = models.TextField(null=True, blank=True)
-    date_f = models.DateField(blank=True, null=True)
+    date_f = models.DateTimeField(blank=True, null=True)
+    comment = models.TextField(null=True, blank=True)
 
     def __unicode__(self):
         return '%s' % self.name

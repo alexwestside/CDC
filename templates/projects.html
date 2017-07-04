@@ -92,45 +92,4 @@
         {% csrf_token %}
         </form>
     </div>
-    <script>
-{#    $(document).ready(function() {#}
-        function pagi (page, id, category){
-            var data = {};
-            var id_el = '#' + id;
-            var csrf_token = $('#csrf_getting_form').find('[name="csrfmiddlewaretoken"]').val();
-            data["csrfmiddlewaretoken"] = csrf_token;
-            data["page"] = page;
-            data["category"] = category;
-{#            var email = $(this).attr('data-page');#}
-{#            e.preventDefault();#}
-            console.log(page);
-                    $.ajax({
-                        url: '/projects_pagi/',
-                        type: 'POST',
-                        data: data,
-                        success: function(data) {
-                            $('.pagination').find('.active').removeClass('active');
-                            $(id_el).parent().addClass('active');
-                            console.log(id_el);
-                            $('#projects').empty();
-                            var content = "";
-                            $.each(data, function (index, data){
-                                content +=
-                                    '<a class="item-project-a" href="#">'
-                                        + '<div class="item-project col-lg-6"' + 'style="background: url(' + data.img + ') center/cover no-repeat">'
-                                            + '<div class="item-pr-cont">'
-                                                + '<h3 class="text-center">' + data.head_main + '</h3>'
-                                                + '<div class="magic-line"></div>'
-                                                + '<div class="project-main-text">' + data.text + '</div>'
-                                            + '</div>'
-                                        +'</div>'
-                                    +'</a>';
-                            });
-                            console.log(content)
-                            $('#projects').append(content);
-                        }
-                        });
-        }
-{#    });#}
-    </script>
 {% endblock %}
