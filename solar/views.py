@@ -187,3 +187,6 @@ def massgen(request):
     print(cat)
     return JsonResponse(cat, safe=False)
 
+
+def google3be2c39b191eaa50(request):
+    return render(request, "google3be2c39b191eaa50.html", locals())

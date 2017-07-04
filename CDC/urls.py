@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^admin/', admin.site.urls),
     url(r'^$', solar.home, name='home'),
+    url(r'^google3be2c39b191eaa50.html$', solar.google3be2c39b191eaa50, name='google3be2c39b191eaa50.html'),
     url(r'^projects/(?P<order>\w+)/(?P<page_pr>\w+)/$', solar.projects, name='projects'),
     url(r'^price/(?P<price_l>\w+)/$', solar.price, name='price'),
     url(r'^service/$', solar.service, name='service'),
@@ -46,6 +47,7 @@ urlpatterns = [
 urlpatterns += i18n_patterns(
     url(r'^admin/', admin.site.urls),
     url(r'^$', solar.home, name='home'),
+    url(r'^google3be2c39b191eaa50.html$', solar.google3be2c39b191eaa50, name='google3be2c39b191eaa50.html'),
     url(r'^projects/(?P<order>\w+)/(?P<page_pr>\w+)/$', solar.projects, name='projects'),
     url(r'^service_sort/$', solar.service_sort, name='service_sort'),
     url(r'^price/(?P<price_l>\w+)/$', solar.price, name='price'),
