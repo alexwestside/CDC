@@ -377,3 +377,23 @@ class MetatitleAdmin(ImportExportModelAdmin):
 
 admin.site.register(Metatitle, MetatitleAdmin)
 
+
+class Feed_back_phoneResource(resources.ModelResource):
+    class Meta:
+        model = Feed_back_phone
+        fields = [field.name for field in Feed_back_phone._meta.fields]
+        import_id_fields = [
+            'id', ]  # it means that the instance could be updated if the instance with the value in this filed exists
+
+
+class Feed_back_phoneAdmin(ImportExportModelAdmin):
+    resource_class = Feed_back_phoneResource
+    list_display = [field.name for field in Feed_back_phone._meta.fields]
+    search_fields = [field.name for field in Feed_back_phone._meta.fields]
+    list_filter = [field.name for field in Feed_back_phone._meta.fields]
+
+admin.site.register(Feed_back_phone, Feed_back_phoneAdmin)
+
+
+
+

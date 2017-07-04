@@ -9,7 +9,7 @@ from django.conf import settings
 from django.views.decorators.cache import cache_page
 from django.core.serializers.json import DjangoJSONEncoder
 from django.core.paginator import Paginator
-
+import datetime
 
 def home(request):
     meta_title = Metatitle.objects.first()
@@ -44,7 +44,7 @@ def projects(request, order, page_pr):
     first_ard = Contacts.objects.first()
     phones = Phone.objects.filter(contact_key=first_ard.id)
     email = Email.objects.filter(contact_key=first_ard.id)
-    massage_form = Form_cont_main.objects.filter(form_name='form').first()
+    massage_form = Form_cont_main.objects.filter(form_name='message').first()
     call_form = Form_cont_main.objects.filter(form_name='call').first()
     return render(request, "projects.html", locals())
 
@@ -62,7 +62,7 @@ def price(request, price_l='365'):
     first_ard = Contacts.objects.first()
     phones = Phone.objects.filter(contact_key=first_ard.id)
     email = Email.objects.filter(contact_key=first_ard.id)
-    massage_form = Form_cont_main.objects.filter(form_name='form').first()
+    massage_form = Form_cont_main.objects.filter(form_name='message').first()
     call_form = Form_cont_main.objects.filter(form_name='call').first()
     return render(request, "price.html", locals())
 
@@ -77,7 +77,7 @@ def service(request):
     first_ard = Contacts.objects.first()
     phones = Phone.objects.filter(contact_key=first_ard.id)
     email = Email.objects.filter(contact_key=first_ard.id)
-    massage_form = Form_cont_main.objects.filter(form_name='form').first()
+    massage_form = Form_cont_main.objects.filter(form_name='message').first()
     call_form = Form_cont_main.objects.filter(form_name='call').first()
     return render(request, "service.html", locals())
 
@@ -122,7 +122,7 @@ def articles(request, order, page_art):
     first_ard = Contacts.objects.first()
     phones = Phone.objects.filter(contact_key=first_ard.id)
     email = Email.objects.filter(contact_key=first_ard.id)
-    massage_form = Form_cont_main.objects.filter(form_name='form').first()
+    massage_form = Form_cont_main.objects.filter(form_name='message').first()
     call_form = Form_cont_main.objects.filter(form_name='call').first()
     return render(request, "articles.html", locals())
 
@@ -134,7 +134,7 @@ def contact(request):
     adress = Adres.objects.filter(contact_key=first_ard.id)
     phones = Phone.objects.filter(contact_key=first_ard.id)
     email = Email.objects.filter(contact_key=first_ard.id)
-    massage_form = Form_cont_main.objects.filter(form_name='form').first()
+    massage_form = Form_cont_main.objects.filter(form_name='message').first()
     call_form = Form_cont_main.objects.filter(form_name='call').first()
     return render(request, "contact.html", locals())
 
@@ -148,9 +148,12 @@ def mass(request):
         "Вам оставили контакты для обратной связи",
         phone + "\n" + "Page of site" + " " + "www.cdc.energy" + link,
         settings.EMAIL_HOST_USER,
-        ['maxkaliberda1@gmail.com',],
+        ['info@cdc.energy',],
         fail_silently=False
     )
+    date = datetime.datetime.now()
+    print(date)
+    #Feed_back.objects.create(name="", phone=phone, email="")
     cat = []
     text_data = Form_cont_main.objects.filter(form_name='call').first()
     print (text_data.text_ans)
@@ -171,7 +174,7 @@ def massgen(request):
         "Вам оставили контакты для обратной связи",
         phone + "\n" + email + "\n" + subject + "\n" + message,
         settings.EMAIL_HOST_USER,
-        ['maxkaliberda1@gmail.com', ],
+        ['info@cdc.energy', ],
         fail_silently=False
     )
     cat = []

@@ -25,10 +25,10 @@
             <div class="col-md-8 col-md-offset-1">
                 {% if price_l == '365' %}
                     {% for price in prices %}
-                    <div class="row text-center gen-price-it">
-                        <div class="item-price">
+                    <div class="row text-center">
+                        <div class="item-price  gen-price-it">
                             <h3 class="text-center">{{ price.head|safe }}</h3>
-                                <div class="row table-price col-md-5 col-md-offset-1">
+                                <div class="row table-price col-md-10 col-md-offset-1">
                                     <div class="table-pr-h col-md-6 text-center">
                                         Мощность
                                     </div>
@@ -46,22 +46,35 @@
                                         {% endif %}
                                     {% endfor %}
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="table-pr-h col-md-12 text-center">
-                                            Среднегодовой доход
-                                    </div>
-                                    {% for profit in profit %}
-                                        {% if profit.price_key.id == price.id %}
-                                            <div class="table-pr-i col-md-12 text-center">
-                                                {{ profit.profit }}
-                                            </div>
-                                        {% endif %}
-
-                                    {% endfor %}
-
-                                </div>
+                        </div>
+                        <div class="item-price gen-price-it">
+                            <h3 class="text-center">{% trans "Прибыль" %}</h3>
+                            <div class="row table-price col-md-10 col-md-offset-1">
+                                {% for profit in profit %}
+                                    {% if profit.price_key.id == price.id %}
+                                        <div class="table-pr-i col-md-12 text-center">
+                                            {{ profit.profit }}
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+{#                                <div class="col-md-6">#}
+{#                                    <div class="table-pr-h col-md-12 text-center">#}
+{#                                            Среднегодовой доход#}
+{#                                    </div>#}
+{#                                    {% for profit in profit %}#}
+{#                                        {% if profit.price_key.id == price.id %}#}
+{#                                            <div class="table-pr-i col-md-12 text-center">#}
+{#                                                {{ profit.profit }}#}
+{#                                            </div>#}
+{#                                        {% endif %}#}
+{##}
+{#                                    {% endfor %}#}
+{##}
+{#                                </div>#}
             {#                 <div class="magic-line-partn mb-20"></div>#}
                         </div>
+
                     </div>
                     {% endfor %}
                 {% endif %}
