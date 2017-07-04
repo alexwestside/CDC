@@ -38,7 +38,7 @@ urlpatterns = [
     url(r'^projects_pagi/$', solar.projects_pagi, name='projects_pagi'),
     url(r'^mass/$', solar.mass, name='mass'),
     url(r'^massgen/$', solar.massgen, name='massgen'),
-    url(r'^summernote/$', include('django_summernote.urls')),
+    url(r'^summernote/', include('django_summernote.urls')),
     url('^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 ]

@@ -83,12 +83,22 @@ WSGI_APPLICATION = 'CDC.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#    }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'hello',
+        'USER': 'hello_django',
+        'PASSWORD': 'cdc25062017',
+        'HOST': 'localhost',
+        'PORT': '',                      # Set to empty string for default.
     }
 }
+
 
 
 # Password validation

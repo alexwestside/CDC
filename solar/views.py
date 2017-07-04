@@ -21,7 +21,7 @@ def home(request):
     first_ard = Contacts.objects.first()
     phones = Phone.objects.filter(contact_key=first_ard.id)
     email = Email.objects.filter(contact_key=first_ard.id)
-    partners = Partner.objects.all()
+    partners = Partner.objects.all().order_by('id')
     massage_form = Form_cont_main.objects.filter(form_name='message').first()
     call_form = Form_cont_main.objects.filter(form_name='call').first()
     return render(request, "home.html", locals())

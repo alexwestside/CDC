@@ -13,6 +13,9 @@ class AboutTranslationOptions(TranslationOptions):
     fields = ('head', 'text')
 translator.register(About, AboutTranslationOptions)
 
+class MissionTranslationOptions(TranslationOptions):
+    fields = ('head', 'text')
+translator.register(Mission, MissionTranslationOptions)
 
 class CircleTranslationOptions(TranslationOptions):
     fields = ('head', 'text')
@@ -35,7 +38,7 @@ translator.register(Partner, PartnerTranslationOptions)
 
 
 class PriceTranslationOptions(TranslationOptions):
-    fields = ('head', 'text')
+    fields = ('head', )
 translator.register(Price, PriceTranslationOptions)
 
 

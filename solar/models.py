@@ -149,7 +149,6 @@ class Img_Service(models.Model):
 
 class Price(models.Model):
     head = models.CharField(max_length=500, null=True, blank=True)
-    text = models.TextField(null=True, blank=True)
 
     def __unicode__(self):
         return '%s' % self.head
