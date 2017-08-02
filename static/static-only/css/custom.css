@@ -709,7 +709,7 @@ background-color: rgba(255, 255, 255, 0)!important;
     /*background-color: rgba(0,0,0,0.4) !important;*/
 }
 
-.item-project-a:hover .item-pr-cont{
+.item-project-a:hover .item-pr-cont, .item-project-a:focus .item-pr-cont, .item-project-a:active .item-pr-cont{
     padding: 15%;
     height: 100%;
     transition: 0.5s;
@@ -1099,6 +1099,10 @@ background-color: rgba(255, 255, 255, 0)!important;
     min-height: 200px;
 }
 
+.table-pr-i{
+     border-bottom: 1px solid rgba(0, 132, 206, 0.2);
+}
+
 .item-price>h3{
     padding-bottom: 20px;
     /*margin-top: 20px;*/
@@ -1120,6 +1124,7 @@ background-color: rgba(255, 255, 255, 0)!important;
 
     font-size: 16px;
     padding: 5px;
+    border-bottom: 1px solid rgba(0, 132, 206, 0.2);
     /*border-bottom: 1px solid silver;*/
 }
 
@@ -1130,6 +1135,9 @@ background-color: rgba(255, 255, 255, 0)!important;
     /*border-left: 1px solid silver;*/
     /*border-right: 1px solid silver;*/
 }
+
+
+
 
 /*Price*/
 

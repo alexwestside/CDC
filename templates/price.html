@@ -17,7 +17,7 @@
 <div class="container">
 <div class="row">
             <div class="col-md-3 service-list">
-                <a href="{% url "price"  '365'  %}" class="category-item-project">Цены</a>
+                <a href="{% url "price"  '365'  %}" class="category-item-project">{% trans "Цены"%}</a>
             {% for add in additational_cats %}
                 <a href="{% url "price"  add.id  %}" class="category-item-project">{{ add.head }}</a>
             {% endfor %}
@@ -26,7 +26,7 @@
                 {% if price_l == '365' %}
                     {% for price in prices %}
                     <div class="row text-center">
-                        <div class="item-price  gen-price-it">
+                        <div class="row item-price  gen-price-it">
                             <h3 class="text-center">{{ price.head|safe }}</h3>
                                 <div class="row table-price col-md-10 col-xs-10 col-sm-10 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
                                     <div class="table-pr-h col-md-6 col-xs-6 col-sm-6 text-center">
@@ -47,8 +47,8 @@
                                     {% endfor %}
                                 </div>
                         </div>
-                        <div class="item-price gen-price-it">
-                            <h3 class="text-center">{% trans "Прибыль" %}</h3>
+                        <div class="row item-price gen-price-it">
+                            <h3 class="text-center">{% trans "Доход" %}</h3>
                             <div class="row table-price col-md-10 col-xs-10 col-sm-10 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
                                 {% for profit in profit %}
                                     {% if profit.price_key.id == price.id %}

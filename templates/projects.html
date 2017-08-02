@@ -24,8 +24,8 @@
             </div>
             <div class="col-lg-8" id="projects">
                 {% for project in project_pagi %}
-                    <a class="item-project-a">
-                    <div class="item-project col-lg-6" style="background: url({{ project.img.url }}) center/cover no-repeat">
+                    <div onClick="return true" class="item-project-a">
+                    <div class="item-project col-md-6" style="background: url({{ project.img.url }}) center/cover no-repeat">
                           <div class="item-pr-cont">
                               <h3 class="text-center">{{ project.project_key.head }}</h3>
                               <div class="magic-line"></div>
@@ -34,7 +34,7 @@
                                 </div>
                           </div>
                     </div>
-                    </a>
+                    </div>
                 {% endfor %}
             </div>
              <div class="col-lg-8 col-lg-offset-4 text-center">

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-26 20:38+0000\n"
+"POT-Creation-Date: 2017-07-06 13:36+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,78 +17,117 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: CDC/settings.py:123
+#: CDC/settings.py:134
 msgid "Ukrainian"
 msgstr ""
 
-#: CDC/settings.py:124
+#: CDC/settings.py:135
 msgid "Russian"
 msgstr ""
 
-#: CDC/settings.py:125
+#: CDC/settings.py:136
 msgid "English"
 msgstr ""
 
-#: templates/articles.html:16
+#: templates/articles.html:20
 msgid "Все новости"
 msgstr "All news"
 
-#: templates/articles.html:41
+#: templates/articles.html:50
 msgid "facebook"
 msgstr "facebook"
 
-#: templates/base.html:79 templates/base.html.py:215
+#: templates/base.html:85 templates/base.html.py:223
 msgid "ГЛАВНАЯ"
 msgstr "HOME"
 
-#: templates/base.html:84 templates/base.html.py:219
+#: templates/base.html:90 templates/base.html.py:227
 msgid "ПРОЕКТЫ"
 msgstr "PROJECTS"
 
-#: templates/base.html:89 templates/base.html.py:223
+#: templates/base.html:95 templates/base.html.py:231
 msgid "УСЛУГИ"
 msgstr "SERVICES"
 
-#: templates/base.html:94 templates/base.html.py:227
+#: templates/base.html:100 templates/base.html.py:235
 msgid "ЦЕНЫ"
 msgstr "PRICES"
 
-#: templates/base.html:99 templates/base.html.py:231
-msgid "НОВОВСТИ"
+#: templates/base.html:105 templates/base.html.py:239
+msgid "НОВОСТИ"
 msgstr "NEWS"
 
-#: templates/base.html:104 templates/base.html.py:235
+#: templates/base.html:110 templates/base.html.py:243
 msgid "КОНТАКТЫ"
 msgstr "CONTACTS"
 
+#: templates/base.html:143
+msgid "Ваше Имя"
+msgstr "Your Name"
+
+#: templates/base.html:146
+msgid "Ваш Email"
+msgstr "Your Email"
+
+#: templates/base.html:149
+msgid "Ваш Телефон"
+msgstr "Your Phone"
+
 #: templates/base.html:152
+msgid "Тема письма"
+msgstr "Subject"
+
+#: templates/base.html:155
+msgid "Напишите нам"
+msgstr "Text"
+
+#: templates/base.html:158
 msgid "Отправить сообщение"
 msgstr "Send a message"
 
-#: templates/base.html:198
+#: templates/base.html:204
 msgid "Заказать звонок"
 msgstr "Request a call"
 
-#: templates/contact.html:18
+#: templates/contact.html:22
 msgid "Дополнительная информация"
 msgstr "Additional Information"
 
-#: templates/contact.html:24
+#: templates/contact.html:28
 msgid "Телефоны"
 msgstr "Phones"
 
-#: templates/contact.html:30
+#: templates/contact.html:34
 msgid "Почта"
 msgstr "Emails"
 
-#: templates/home.html:109
+#: templates/home.html:98
 msgid "НАШИ ПРОЕКТЫ"
 msgstr "OUR PROJECTS"
 
-#: templates/home.html:124
+#: templates/home.html:113
 msgid "ВСЕ ПРОЕТКЫ"
 msgstr "ALL PROJECTS"
 
-#: templates/home.html:129
+#: templates/home.html:118
 msgid "УЧАСТНИКИ КОНСОРЦИУМА"
 msgstr "CONSORTIUM PARTICIPANTS"
+
+#: templates/price.html:20
+msgid "Цены"
+msgstr "Price"
+
+#: templates/price.html:33
+msgid "Мощность"
+msgstr "Power"
+
+#: templates/price.html:36
+msgid "Цена"
+msgstr "Price"
+
+#: templates/price.html:51
+msgid "Доход"
+msgstr "Profit"
+
+#~ msgid "Прибыль"
+#~ msgstr "Profit"

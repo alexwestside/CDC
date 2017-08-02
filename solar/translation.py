@@ -89,6 +89,11 @@ class Service_mainTranslationOptions(TranslationOptions):
 translator.register(Service_main, Service_mainTranslationOptions)
 
 
+class Article_mainTranslationOptions(TranslationOptions):
+    fields = ('head', 'text')
+translator.register(Article_main, Article_mainTranslationOptions)
+
+
 class Price_mainTranslationOptions(TranslationOptions):
     fields = ('head', 'text')
 translator.register(Price_main, Price_mainTranslationOptions)

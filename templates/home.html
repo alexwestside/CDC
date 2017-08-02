@@ -95,9 +95,9 @@
 
         <div class="container projects">
         <div class="row">
-            <h2 class="text-center mb-30">{% trans 'НАШИ ПРОЕКТЫ' %}</h2>
+            <h2 class="text-center mb-30">{% trans 'ВСЕ ПРОЕКТЫ' %}</h2>
             {% for project in projects %}
-                <a class="item-project-a">
+                <div onClick="return true" class="item-project-a">
                 <div class="item-project col-md-6" style="background: url({{ project.img.url }}) center/cover no-repeat">
                       <div class="item-pr-cont">
                           <h3 class="text-center">{{ project.project_key.head }}</h3>
@@ -107,7 +107,7 @@
                           </div>
                       </div>
                 </div>
-                </a>
+                </div>
             {% endfor %}
             <div class="text-center col-md-12 project-but-block">
                 <a href="{% url 'projects' 'all' 1 %}" class="but-project">{% trans 'ВСЕ ПРОЕТКЫ' %}</a>
@@ -129,6 +129,7 @@
                                     {{ parnter.head }}
                                 </h3>
                                 <div class="magic-line-partn mb-20"></div>
+
                                 <p>{{ parnter.text }}</p>
                             </div>
                         </div>
